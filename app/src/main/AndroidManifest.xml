@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PICK" />
+
+            <data android:mimeType="*/*" />
+        </intent>
+    </queries>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.providers.media.MediaProvider" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" /> <!-- Permissions required by the SDK -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- Permissions required by the Demo App -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:descendantFocusability="blocksDescendants"
+        android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.App"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:icon,theme">
+        <activity
+            android:name=".reels.ui.GreenScreenActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ReelPostActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ReelsFeedActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
+
+            <!-- Its for https url support for reels -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wishmaplus.com"
+                    android:pathPrefix="/reel/"
+                    android:scheme="https" />
+            </intent-filter>
+            <!-- Its for https url support for reels -->
+
+
+            <!-- Its for http url support for reels -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wishmaplus.com"
+                    android:pathPrefix="/reel/"
+                    android:scheme="http" />
+            </intent-filter>
+            <!-- Its for https url support for reels -->
+        </activity>
+        <activity
+            android:name=".reels.ui.CameraRecorderActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ReelEditorActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.CreateReelActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".zego.PreviewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".zego.HomePageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".zego.LivePageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ComplaintList"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.GroupMembers"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.GroupDashboard"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.AddCoverPhotoGroup"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.GroupAddPeople"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.WebViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.PostDetails"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.AnalyticsContent"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.AnalyticsDashboard"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.EditAudience"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.NotEligibleForProfessional"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.SuccessProfessional"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ProfessionalTools"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.MonetizationProfessional"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.AudienceProfessional"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.WelcomeProfessional"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.TurnOnProfessionalMode"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ManageAds"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.CreateNewAd"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.BoostContent"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.Advertisement"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.CreatorSupportActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.DashBoardPersonalInformation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ProfessionalDashBoardPersonal"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.AdvertiseActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.SwitchPages"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.PageProfilePicture"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.SettingUpYourPage"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.YourFriends"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.CreateProfessionalPage"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.SentRequests"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.FriendRequest"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.BlockedUser"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.SettingsAndPrivacy"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ProfessionalDashboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.WebViewInformationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.CreateGroupActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.GroupActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.DeleteAccountReasonActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.DeactivateOrDeleteAccount"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.DeleteAccount"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.OtpActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.TermAndCondition"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.CreatePersonalProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ProfessionalProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.PersonalProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.CreateNewProfilePage"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.IncomeReportActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ShareRedirectActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wishmaplus.com"
+                    android:pathPattern="/post/.*"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.PostActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.VideoViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew" />
+        <activity
+            android:name=".Activity.ImageZoomViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew" />
+        <activity
+            android:name=".Activity.StoryViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew" />
+        <activity
+            android:name=".Activity.VideoEditActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew" />
+        <activity
+            android:name=".Activity.ImageEditActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew" />
+        <activity
+            android:name=".Activity.SignUpActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ProfileActivity"
+            android:exported="true">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="wishmaplus.com"
+                    android:pathPattern="/Page/.*"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="wishmaplus.com"
+                    android:pathPattern="/getPageDetails/.*"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.ReferralActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew" />
+        <activity
+            android:name=".Activity.EditProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.PackageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.TermPrivacyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.LevelCountActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.ContactUsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.LevelIncomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Notification.NotificationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew">
+            <intent-filter>
+                <action android:name="OPEN_NOTIFICATION_FRAGMENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.WelcomeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Appnew">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" /> <!-- Add your app's Google app ID (this will be added automatically with google-services.json) -->
+        <meta-data
+            android:name="com.google.android.gms.appid"
+            android:value="wishma-plus" />
+
+        <service
+            android:name=".Utils.VideoEdit.AutoPlayVideo.DownloadService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".Utils.VideoEdit.AutoPlayVideo.DownloadManagerReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher_foreground" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <service
+            android:name=".Notification.service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Utils.VideoEdit.AutoPlayVideo.DownloadManagerService"
+            android:exported="false" /> <!-- android:foregroundServiceType="dataSync" /> -->
+        <receiver
+            android:name=".Utils.Receiver.InstallReferrerReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <!--
+   <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider_smart_image_picker"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                tools:replace="android:resource" />
+        </provider>
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider_smart_image_picker"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name=".PageAccess.ui.PageAccessActivity"
+            android:exported="false"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".PageAccess.ui.PendingInvitesActivity"
+            android:exported="false"
+            android:theme="@style/Appnew"
+            android:windowSoftInputMode="adjustResize" />
+    </application>
+
+</manifest>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Dark Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivPageImage"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_default_page"
+                    app:shapeAppearanceOverlay="@style/RoundedImageStyle12dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/tvPageName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sunrise Tech Hub"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:id="@+id/tvInvitedBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Invited by Arjun Mehta"
+                        android:textColor="#8AFFFFFF"
+                        android:textSize="11sp"
+                        android:maxLines="1"
+                        android:ellipsize="end" />
+
+                </LinearLayout>
+
+                <!-- Pending Badge -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PENDING"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:background="@drawable/bg_pending_badge" />
+
+            </LinearLayout>
+
+            <!-- Date Row -->
+            <TextView
+                android:id="@+id/tvEntryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Jun 12, 2026"
+                android:drawableStart="@drawable/ic_calendar_small"
+                android:drawableTint="@color/white"
+                android:textColor="#60FFFFFF"
+                android:textSize="10sp"
+                android:drawablePadding="4dp" />
+
+        </LinearLayout>
+
+        <!-- Card Body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PERMISSIONS GRANTED"
+                android:textColor="@color/grey_4"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.08"
+                android:layout_marginBottom="8dp" />
+
+            <GridLayout
+                android:id="@+id/gridPermissions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:useDefaultMargins="false">
+
+                <!-- Manage Content -->
+                <LinearLayout
+                    android:id="@+id/rowManageContent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_perm_chip"
+                    android:layout_margin="3dp"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/icManageContent"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_edit"
+                        android:background="@drawable/bg_icon_blue"
+                        android:padding="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:text="Manage Content"
+                        android:textColor="@color/grey_6"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Manage Messages -->
+                <LinearLayout
+                    android:id="@+id/rowManageMessages"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_perm_chip"
+                    android:layout_margin="3dp"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/icManageMessages"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_message"
+                        android:background="@drawable/bg_icon_green"
+                        android:padding="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:text="Manage Messages"
+                        android:textColor="@color/grey_6"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Manage Community -->
+                <LinearLayout
+                    android:id="@+id/rowManageCommunity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_perm_chip"
+                    android:layout_margin="3dp"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/icManageCommunity"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_people"
+                        android:background="@drawable/bg_icon_purple"
+                        android:padding="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:text="Manage Community"
+                        android:textColor="@color/grey_6"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- View Insights -->
+                <LinearLayout
+                    android:id="@+id/rowViewInsights"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_perm_chip"
+                    android:layout_margin="3dp"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/icViewInsights"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_chart"
+                        android:background="@drawable/bg_icon_amber"
+                        android:padding="5dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:text="View Insights"
+                        android:textColor="@color/grey_6"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+            </GridLayout>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDecline"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Decline"
+                    android:textSize="13sp"
+                    android:textColor="@color/red_text"
+                    app:strokeColor="@color/red_text"
+                    app:strokeWidth="1.5dp"
+                    app:cornerRadius="20dp"
+                    app:rippleColor="@color/red" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAccept"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:text="Accept"
+                    android:textSize="13sp"
+                    android:textColor="@color/white"
+                    app:backgroundTint="#014982"
+                    app:cornerRadius="20dp"
+                    app:rippleColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+            <!-- Loading -->
+            <FrameLayout
+                android:id="@+id/layoutActionLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone">
+                <ProgressBar
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/colorPrimaryLight" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

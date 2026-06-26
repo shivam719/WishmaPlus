@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/zoomAC"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <!-- FULL SCREEN IMAGE — poore screen pe -->
+    <com.infotech.wishmaplus.Utils.TouchImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBlurView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blur_gradient_bg"
+        android:paddingBottom="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back"
+            app:tint="@android:color/white" />
+
+        <TextView
+            android:id="@+id/user_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Image"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/back_button"
+            app:layout_constraintBottom_toBottomOf="@id/back_button"
+            app:layout_constraintStart_toEndOf="@id/back_button"
+            app:layout_constraintEnd_toStartOf="@id/moreBTn" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/moreBTn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="More"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="@id/back_button"
+            app:layout_constraintBottom_toBottomOf="@id/back_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_more_vert"
+            app:tint="@android:color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- BOTTOM GRADIENT OVERLAY — image ke upar float karta hai -->
+    <LinearLayout
+        android:id="@+id/bottomBlurView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/gradient_bottom"
+        android:paddingTop="@dimen/_30sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBlurView"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintHeight_max="300dp">
+
+        <!-- Scrollable zone: user info + caption -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="180dp"
+            android:scrollbars="none"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_12sdp"
+                android:paddingBottom="@dimen/_6sdp">
+
+                <!-- User row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/_8sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/profile"
+                        android:layout_width="@dimen/_34sdp"
+                        android:layout_height="@dimen/_34sdp"
+                        android:src="@drawable/user_icon"
+                        android:layout_marginEnd="@dimen/_10sdp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/nameTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/timeTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#88FFFFFF"
+                            android:textSize="11sp"
+                            android:layout_marginTop="@dimen/_1sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Caption -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/postTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/bgColor"
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="3dp"
+                    android:maxLines="3"
+                    android:ellipsize="none"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/viewMoreTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_12sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:textColor="@color/colorAccentLight"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    android:text="View More" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#33FFFFFF"
+            android:layout_marginHorizontal="@dimen/_10sdp" />
+
+        <!-- Counts row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_3sdp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red_text"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:drawablePadding="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_like" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#99FFFFFF"
+                android:textSize="11sp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/share_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#99FFFFFF"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#33FFFFFF" />
+
+        <!-- Action buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_6sdp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/likeBtn"
+                style="@style/TextAppearance.Compat.Notification.Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="0dp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="Like"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#AAFFFFFF"
+                android:textSize="11sp"
+                app:icon="@drawable/ic_liked_thumbs"
+                app:iconGravity="top"
+                app:iconSize="@dimen/_18sdp"
+                app:iconTint="#AAFFFFFF"
+                app:iconPadding="@dimen/_3sdp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/commentBtn"
+                style="@style/TextAppearance.Compat.Notification.Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="0dp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="Comment"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#AAFFFFFF"
+                android:textSize="11sp"
+                app:icon="@drawable/ic_comment"
+                app:iconGravity="top"
+                app:iconSize="@dimen/_18sdp"
+                app:iconTint="#AAFFFFFF"
+                app:iconPadding="@dimen/_3sdp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/whatsAppBtn"
+                style="@style/TextAppearance.Compat.Notification.Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="0dp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="Send"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#AAFFFFFF"
+                android:textSize="11sp"
+                app:icon="@drawable/ic_whatsapp"
+                app:iconGravity="top"
+                app:iconSize="@dimen/_18sdp"
+                app:iconTint="#AAFFFFFF"
+                app:iconPadding="@dimen/_3sdp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/shareBtn"
+                style="@style/TextAppearance.Compat.Notification.Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="0dp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="Share"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#AAFFFFFF"
+                android:textSize="11sp"
+                app:icon="@drawable/ic_share"
+                app:iconGravity="top"
+                app:iconSize="@dimen/_18sdp"
+                app:iconTint="#AAFFFFFF"
+                app:iconPadding="@dimen/_3sdp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

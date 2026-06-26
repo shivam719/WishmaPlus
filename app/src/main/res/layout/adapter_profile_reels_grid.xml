@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    adapter_profile_reels_grid.xml
+    ─────────────────────────────────────────────────────────────────────────
+    This layout is inflated by MultiContentAdapter for view type 444
+    (VIEW_TYPE_PROFILE_REELS) — the full-width row that contains the 3-column
+    reels grid rendered inside the Profile screen.
+
+    Hierarchy:
+      LinearLayout (root, full width)
+        └── RecyclerView (reelsGrid)  — 3-col grid, nestedScrollingEnabled=false
+        └── TextView     (noReelsTv) — shown when list is empty
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <!-- 3-column reels grid -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reelsGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
+        android:padding="1dp"
+        tools:listitem="@layout/item_reel_thumbnail" />
+
+    <!-- Empty-state label -->
+    <TextView
+        android:id="@+id/noReelsTv"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:drawableTop="@drawable/ic_image_big"
+        android:drawablePadding="12dp"
+        android:gravity="center"
+        android:text="@string/reels_not_available"
+        android:textColor="@color/grey_6"
+        android:textSize="13sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

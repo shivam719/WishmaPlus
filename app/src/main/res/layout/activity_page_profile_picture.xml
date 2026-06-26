@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PageProfilePicture">
+
+    <!-- Back Button -->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile Picture"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_button" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/moreBTn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:paddingVertical="@dimen/_10sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_button"
+        app:srcCompat="@drawable/ic_more" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:id="@+id/tvTitle"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/customise_your_page"
+                android:textColor="@android:color/black"
+                />
+
+            <!-- Subtitle -->
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:id="@+id/tvSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/your_profile_picture_is_one_of_the_first_things_that_people_see_try_using_your_logo_or_a_simple_image_that_people_can_easily_associate_with_you"
+                android:textColor="@android:color/black"
+                />
+            <!-- COVER PHOTO -->
+
+            <!-- NAME -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/cover_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_155sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/dog_cover"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/edit_cover_icon"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/circle_background_white"
+                    android:contentDescription="Edit Cover Photo"
+                    android:src="@drawable/ic_camera"
+                    app:layout_constraintBottom_toBottomOf="@id/cover_photo"
+                    app:layout_constraintEnd_toEndOf="@id/cover_photo" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="@dimen/_115sdp"
+                    android:layout_height="@dimen/_115sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/_minus40sdp"
+                    android:background="@drawable/circle_background"
+                    android:padding="@dimen/_2sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/user_icon"
+                    android:clipToOutline="true"
+                    app:layout_constraintBottom_toBottomOf="@id/cover_photo"
+                    app:layout_constraintTop_toBottomOf="@id/cover_photo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/edit_profile_icon"
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_alignEnd="@id/profile_picture"
+                    android:layout_alignBottom="@id/profile_picture"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/circle_background_white"
+                    android:padding="@dimen/_8sdp"
+                    android:src="@drawable/ic_camera"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_picture"
+                    app:layout_constraintEnd_toEndOf="@id/profile_picture" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center_horizontal"
+                android:text="Rrsdc"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </ScrollView>
+    <!-- Next Button -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_12sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/text_button_border"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/create"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/color_white"
+        android:textAllCaps="false" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

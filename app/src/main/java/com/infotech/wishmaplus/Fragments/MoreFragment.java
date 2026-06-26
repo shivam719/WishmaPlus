@@ -1,0 +1,363 @@
+package com.infotech.wishmaplus.Fragments;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.infotech.wishmaplus.Activity.Advertisement;
+import com.infotech.wishmaplus.Activity.ContactUsActivity;
+import com.infotech.wishmaplus.Activity.CreateNewProfilePage;
+import com.infotech.wishmaplus.Activity.GroupActivity;
+import com.infotech.wishmaplus.Activity.IncomeReportActivity;
+import com.infotech.wishmaplus.Activity.LevelCountActivity;
+import com.infotech.wishmaplus.Activity.MainActivity;
+import com.infotech.wishmaplus.Activity.PackageActivity;
+import com.infotech.wishmaplus.Activity.ProfessionalDashboardActivity;
+import com.infotech.wishmaplus.Activity.ProfileActivity;
+import com.infotech.wishmaplus.Activity.ReferralActivity;
+import com.infotech.wishmaplus.Activity.SettingsAndPrivacy;
+import com.infotech.wishmaplus.Activity.SwitchPages;
+import com.infotech.wishmaplus.Adapter.UserPagesAdapter;
+import com.infotech.wishmaplus.Api.Response.PageData;
+import com.infotech.wishmaplus.Api.Response.PagesResponse;
+import com.infotech.wishmaplus.Api.Response.UserDetailResponse;
+import com.infotech.wishmaplus.R;
+import com.infotech.wishmaplus.ReelsFeedActivity;
+import com.infotech.wishmaplus.Utils.CustomAlertDialog;
+import com.infotech.wishmaplus.Utils.CustomLoader;
+import com.infotech.wishmaplus.Utils.PreferencesManager;
+import com.infotech.wishmaplus.Utils.UtilMethods;
+import com.infotech.wishmaplus.Utils.Utility;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class MoreFragment extends Fragment {
+
+
+    private static final String ARG_PAGE_ID = "pageId";
+    private static final String ARG_PROFILE_TYPE = "isProfileType";
+    public static BottomSheetDialog bottomSheetUser;
+    ImageView profileIcon;
+    TextView nameTv, currentPackage;
+    ActivityResultLauncher<Intent> launcher;
+
+    List<PageData> list = new ArrayList<>();
+    RecyclerView userRecycler;
+    UserPagesAdapter adapter;
+    View referralView, reelsView;
+    private PreferencesManager tokenManager;
+    private UserDetailResponse userDetailResponse;
+
+    String accessLink = "";
+    private CustomLoader loader;
+    private String pageId;
+    private boolean isProfileType;
+    ActivityResultLauncher<Intent> profileActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+            int refreshType = result.getData().getIntExtra("RefreshType", 0);
+            if (refreshType == 1) {
+                //UserDetails
+                getUserDetail();
+            }
+
+
+        }
+    });
+
+    public static MoreFragment newInstance(String pageId, boolean isProfileType) {
+        MoreFragment fragment = new MoreFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PAGE_ID, pageId);
+        args.putBoolean(ARG_PROFILE_TYPE, isProfileType);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            pageId = getArguments().getString(ARG_PAGE_ID, "0");
+            isProfileType = getArguments().getBoolean(ARG_PROFILE_TYPE, false);
+        } else {
+            pageId = "0";
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_more, container, false);
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                // Close dialog if visible
+                if (UtilMethods.bottomSheetUser != null && UtilMethods.bottomSheetUser.isShowing()) {
+                    UtilMethods.bottomSheetUser.dismiss();
+                }
+            }
+        });
+        loader = new CustomLoader(requireActivity(), android.R.style.Theme_Translucent_NoTitleBar);
+        tokenManager = ((MainActivity) requireActivity()).tokenManager;
+        if (tokenManager == null) {
+            tokenManager = new PreferencesManager(requireActivity(), 1);
+        }
+        pageId = tokenManager.getString("ACTIVE_PAGE_ID");
+        isProfileType = tokenManager.getBooleanNonRemoval("PROFILE_TYPE");
+        if (isProfileType) {
+            pageId = "";
+        }
+        getPagesList();
+
+        profileIcon = v.findViewById(R.id.profileIcon);
+        nameTv = v.findViewById(R.id.nameTv);
+        currentPackage = v.findViewById(R.id.currentPackage);
+        TextView termAndPrivacyTxt = v.findViewById(R.id.term_and_privacy_txt);
+        Utility.INSTANCE.setTerm_Privacy(requireActivity(), termAndPrivacyTxt, 0, 16, 21, 35);
+        userDetailResponse = UtilMethods.INSTANCE.getUserDetailResponse(tokenManager);
+        if (userDetailResponse == null) {
+            getUserDetail();
+        } else {
+            setUserData();
+        }
+        v.findViewById(R.id.groupView).setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), GroupActivity.class));
+        });
+        v.findViewById(R.id.professionalView).setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), ProfessionalDashboardActivity.class));
+//            startActivity(new Intent(requireActivity(), ProfessionalDashBoardPersonal.class));
+        });
+        v.findViewById(R.id.profileIcon).setOnClickListener(view -> {
+            profileActivityResultLauncher.launch(new Intent(requireActivity(), ProfileActivity.class).putExtra("userData", userDetailResponse).putExtra("pageId", pageId).putExtra("isProfile", isProfileType));
+        });
+        v.findViewById(R.id.userArrow).setOnClickListener(v1 -> {
+            openUserBottomSheetDialog(requireActivity(), userDetailResponse, launcher);
+//            startActivity(new Intent(requireActivity(), CreateNewProfilePage.class));
+        });
+
+        v.findViewById(R.id.packageView).setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), PackageActivity.class));
+        });
+        referralView = v.findViewById(R.id.referralView);
+        reelsView = v.findViewById(R.id.reelsView);
+        if (pageId == null) {
+            referralView.setVisibility(GONE);
+        } else {
+            referralView.setVisibility(VISIBLE);
+        }
+        v.findViewById(R.id.reelsView).setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), ReelsFeedActivity.class));
+        });
+        v.findViewById(R.id.referralView).setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), ReferralActivity.class).putExtra("userData", userDetailResponse));
+        });
+        v.findViewById(R.id.levelCountView).setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), LevelCountActivity.class));
+        });
+        v.findViewById(R.id.contactUsView).setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), ContactUsActivity.class));
+        });
+        v.findViewById(R.id.incomeView).setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), IncomeReportActivity.class));
+        });
+        v.findViewById(R.id.logoutView).setOnClickListener(view -> {
+            signOut();
+        });
+        v.findViewById(R.id.settingView).setOnClickListener(view -> {
+            Intent intent = new Intent(requireActivity(), SettingsAndPrivacy.class);
+            intent.putExtra("accessLink", accessLink);
+            intent.putExtra("isProfileType", isProfileType);
+            intent.putExtra("pageId", pageId);
+            startActivity(intent);
+        });
+        v.findViewById(R.id.adsButton).setOnClickListener(view -> {
+            Intent intent = new Intent(requireActivity(), Advertisement.class);
+            intent.putExtra("page_id", pageId);
+            startActivity(intent);
+        });
+        return v;
+    }
+
+    private void getUserDetail() {
+        if (pageId != null && !isProfileType) {
+            UtilMethods.INSTANCE.getPageDetail(requireActivity(), pageId, null, tokenManager, object -> {
+                userDetailResponse = (UserDetailResponse) object;
+                setUserData();
+            });
+        } else {
+            UtilMethods.INSTANCE.userDetail(requireActivity(), "0", "", null, tokenManager, object -> {
+                userDetailResponse = (UserDetailResponse) object;
+                setUserData();
+            });
+        }
+    }
+
+    private void getPagesList() {
+        loader.show();
+        UtilMethods.INSTANCE.getPagesResponse(requireActivity(), new UtilMethods.ApiCallBackMulti() {
+            @Override
+            public void onSuccess(Object object) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+                list.clear();
+                PagesResponse pagesResponse = (PagesResponse) object;
+                if (!pagesResponse.getResult().isEmpty()) {
+                    list.addAll(pagesResponse.getResult());
+                    if (adapter != null) {
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+
+            }
+        });
+    }
+
+    private void signOut() {
+        CustomAlertDialog customAlertDialog = new CustomAlertDialog(requireActivity(), true);
+        customAlertDialog.Successfullogout("Do you really want to Logout?", requireActivity(), tokenManager);
+       /* mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
+
+            // Toast.makeText(ProfileActivity.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
+
+        });*/
+    }
+
+    private void setUserData() {
+        if (userDetailResponse.getLastName() == null) {
+            nameTv.setText(userDetailResponse.getFisrtName());
+        } else {
+            nameTv.setText(userDetailResponse.getFisrtName() + " " + userDetailResponse.getLastName());
+        }
+        if (userDetailResponse.getPackageDetail() != null) {
+            currentPackage.setText(" " + userDetailResponse.getPackageDetail().getPackageName() + " (" + Utility.INSTANCE.formattedAmountWithRupees(userDetailResponse.getPackageDetail().getPackageCost()) + ")");
+        }
+        if(userDetailResponse.getAccessLink()!=null && !userDetailResponse.getAccessLink().isEmpty()){
+            accessLink = userDetailResponse.getAccessLink();
+        }
+        Glide.with(requireActivity()).load(userDetailResponse.getProfilePictureUrl()).apply(UtilMethods.INSTANCE.getRequestOption_With_UserIcon()).into(profileIcon);
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void openUserBottomSheetDialog(Activity activity, UserDetailResponse userDetailResponse, ActivityResultLauncher<Intent> launcher) {
+
+
+        if (bottomSheetUser != null && bottomSheetUser.isShowing()) {
+            return;
+        }
+        bottomSheetUser = new BottomSheetDialog(activity, R.style.DialogStyle);
+        Objects.requireNonNull(bottomSheetUser.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View sheetView = inflater.inflate(R.layout.dialog_create_user, null);
+        PreferencesManager tokenManager = new PreferencesManager(activity, 1);
+        String pageNumber = tokenManager.getString("ACTIVE_PAGE_ID");
+        LinearLayout createUser = sheetView.findViewById(R.id.createUser);
+        AppCompatTextView userName = sheetView.findViewById(R.id.userName);
+        AppCompatImageView userImage = sheetView.findViewById(R.id.userImage);
+        userRecycler = sheetView.findViewById(R.id.userRecycler);
+
+        adapter = new UserPagesAdapter(requireActivity(), list, new UserPagesAdapter.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(PageData user, int pos) {
+
+                // Current Active Page Id
+                String currentPageId = pageNumber;
+
+                // Clicked Page Id
+                String clickedPageId = String.valueOf(user.getPageId());
+
+                // Already Selected Check
+                if (clickedPageId.equals(currentPageId)) {
+
+                    Toast.makeText(activity, "You're already using this profile", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                bottomSheetUser.dismiss();
+
+                Intent intent = new Intent(activity, SwitchPages.class);
+
+                intent.putExtra("imageUrl", user.getProfileImageUrl());
+
+                intent.putExtra("pageName", user.getPageName());
+
+                intent.putExtra("pageId", user.getPageId());
+
+                intent.putExtra("isProfile", user.isProfile());
+
+                launcher.launch(intent);
+            }
+
+            @Override
+            public void onMoreClicked(View anchor, PageData user, int pos) {
+
+            }
+        }, pageNumber);
+        userRecycler.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        userRecycler.setAdapter(adapter);
+
+        if (userDetailResponse != null) {
+            userName.setText(userDetailResponse.getFisrtName() + userDetailResponse.getLastName());
+            Glide.with(requireContext()).load(userDetailResponse.getProfilePictureUrl()).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).apply(UtilMethods.INSTANCE.getRequestOption_With_UserIcon()).into(userImage);
+        }
+        createUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetUser.dismiss();
+                Intent intent = new Intent(activity, CreateNewProfilePage.class);
+                launcher.launch(intent);
+            }
+        });
+        bottomSheetUser.setCancelable(true);
+        bottomSheetUser.setContentView(sheetView);
+        BottomSheetBehavior.from(Objects.requireNonNull(bottomSheetUser.findViewById(com.google.android.material.R.id.design_bottom_sheet))).setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheetUser.show();
+
+    }
+
+    @Override
+    public void onResume() {
+        getPagesList();
+        super.onResume();
+    }
+}

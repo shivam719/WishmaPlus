@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/editProfileV"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!-- ─── Top Bar ─────────────────────────────────────────────────────── -->
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/user_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_details"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_button" />
+
+    <!-- ─── Scrollable Content ──────────────────────────────────────────── -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_20sdp">
+
+            <!-- ─── Cover Photo ──────────────────────────────────────────── -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cover_photo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_155sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dog_cover"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/edit_cover_icon"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_margin="@dimen/_15sdp"
+                android:background="@drawable/circle_background_white"
+                android:contentDescription="Edit Cover Photo"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintBottom_toBottomOf="@id/cover_photo"
+                app:layout_constraintEnd_toEndOf="@id/cover_photo" />
+
+            <!-- ─── Profile Picture ──────────────────────────────────────── -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="@dimen/_115sdp"
+                android:layout_height="@dimen/_115sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_minus40sdp"
+                android:background="@drawable/circle_background"
+                android:padding="@dimen/_2sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user_icon"
+                app:layout_constraintBottom_toBottomOf="@id/cover_photo"
+                app:layout_constraintStart_toStartOf="@id/cover_photo" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/edit_profile_icon"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:background="@drawable/circle_background_white"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintBottom_toBottomOf="@id/profile_picture"
+                app:layout_constraintEnd_toEndOf="@id/profile_picture" />
+
+            <!-- ─── User Fields ──────────────────────────────────────────── -->
+            <LinearLayout
+                android:id="@+id/layoutUserFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_picture">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_name"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+                    android:hint="@string/enter_first_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_LastName"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+                    android:hint="@string/enter_last_name"
+                    android:imeOptions="actionNext"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_gender"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/select_gender"
+                    android:longClickable="false"
+                    android:paddingHorizontal="@dimen/_14sdp"
+                    android:paddingVertical="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:drawableEndCompat="@drawable/ic_arrow_drop_down" />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etDate"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/select_date"
+                    android:longClickable="false"
+                    android:paddingHorizontal="@dimen/_14sdp"
+                    android:paddingVertical="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:drawableEndCompat="@drawable/ic_calendar" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_bio"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="@string/enter_bio"
+                    android:imeOptions="actionNext"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_address"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="@string/enter_address"
+                    android:imeOptions="actionNext"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_state"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/select_state"
+                    android:longClickable="false"
+                    android:paddingHorizontal="@dimen/_14sdp"
+                    android:paddingVertical="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:drawableEndCompat="@drawable/ic_arrow_drop_down" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_city"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/select_city"
+                    android:longClickable="false"
+                    android:paddingHorizontal="@dimen/_14sdp"
+                    android:paddingVertical="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:drawableEndCompat="@drawable/ic_arrow_drop_down" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_bank"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/select_bank"
+                    android:longClickable="false"
+                    android:paddingHorizontal="@dimen/_14sdp"
+                    android:paddingVertical="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:drawableEndCompat="@drawable/ic_arrow_drop_down" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_branch"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="@string/enter_branch_name"
+                    android:imeOptions="actionNext"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_ifsc"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="@string/enter_ifsc"
+                    android:imeOptions="actionNext"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_account_number"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="@string/enter_account_number"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_account_name"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="@string/enter_account_name"
+                    android:imeOptions="actionDone"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+            </LinearLayout>
+
+            <!-- ─── Page Fields ──────────────────────────────────────────── -->
+            <LinearLayout
+                android:id="@+id/layoutPageFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_picture">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_page_name"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="Page Name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_page_bio"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="Bio / Description"
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine"
+                    android:maxLines="4"
+                    android:minLines="2"
+                    android:padding="@dimen/_14sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_page_category"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:cursorVisible="false"
+                    android:ellipsize="end"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="Select Category"
+                    android:longClickable="false"
+                    android:paddingHorizontal="@dimen/_14sdp"
+                    android:paddingVertical="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:drawableEndCompat="@drawable/ic_arrow_drop_down" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_page_website"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="Website URL"
+                    android:imeOptions="actionNext"
+                    android:inputType="textUri"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_page_email"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="Email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_page_phone"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="Phone Number"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_page_address"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="Address"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPostalAddress"
+                    android:padding="@dimen/_14sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@android:color/darker_gray" />
+
+            </LinearLayout>
+
+            <!-- ─── Barrier ───────────────────────────────────────────────── -->
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/fieldsBottomBarrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="layoutUserFields,layoutPageFields" />
+
+            <!-- ─── Save Button ───────────────────────────────────────────── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_save"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:backgroundTint="@color/colorAccent"
+                android:fontFamily="sans-serif-medium"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/save"
+                android:textColor="@android:color/white"
+                app:cornerRadius="@dimen/_40sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fieldsBottomBarrier"
+                app:strokeColor="@color/colorPrimary_alpha25"
+                app:strokeWidth="@dimen/_1sdp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

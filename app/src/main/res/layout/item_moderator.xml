@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:background="@drawable/rounded_corners"
+    android:layout_marginHorizontal="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_5sdp">
+
+    <!-- Avatar -->
+    <TextView
+        android:id="@+id/tvAvatarInitials"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_48sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_17ssp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_11sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_14ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/btnMore"
+        app:layout_constraintStart_toEndOf="@id/tvAvatarInitials"
+        app:layout_constraintTop_toTopOf="@id/tvAvatarInitials" />
+
+    <!-- Mobile + Date row -->
+    <LinearLayout
+        android:id="@+id/metaRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_11sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@id/btnMore"
+        app:layout_constraintStart_toEndOf="@id/tvAvatarInitials"
+        app:layout_constraintTop_toBottomOf="@id/tvName">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_11sdp"
+            android:layout_height="@dimen/_11sdp"
+            app:srcCompat="@drawable/mobile"
+            app:tint="@color/grey_4" />
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:textColor="@color/grey_4"
+            android:textSize="@dimen/_11ssp" />
+
+        <View
+            android:layout_width="@dimen/_3sdp"
+            android:layout_height="@dimen/_3sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:background="@color/grey_3"
+            android:alpha="0.4" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_11sdp"
+            android:layout_height="@dimen/_11sdp"
+            app:srcCompat="@drawable/ic_calendar"
+            app:tint="@color/grey_4" />
+
+        <TextView
+            android:id="@+id/tvEntryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:textColor="@color/grey_4"
+            android:textSize="@dimen/_11ssp" />
+    </LinearLayout>
+
+    <!-- Status badge -->
+    <TextView
+        android:id="@+id/tvInviteStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_11sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:paddingHorizontal="@dimen/_9sdp"
+        android:paddingVertical="@dimen/_3sdp"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/tvAvatarInitials"
+        app:layout_constraintTop_toBottomOf="@id/metaRow" />
+
+    <!-- Three-dot button -->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnMore"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:background="@drawable/circle_background"
+        android:contentDescription="More"
+        android:backgroundTint="@color/bgColor"
+        android:padding="@dimen/_7sdp"
+        android:src="@drawable/ic_more_vert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/grey_4" />
+
+    <!-- Divider -->
+    <!-- Divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:background="@color/grey_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInviteStatus" />
+
+    <!-- No-permission warning banner -->
+    <TextView
+        android:id="@+id/tvNoPermissionWarning"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:layout_marginBottom="@dimen/_14sdp"
+        android:text="⚠ No permission allowed for this moderator"
+        android:textColor="#E02020"
+        android:textSize="@dimen/_11ssp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- PERMISSIONS LABEL -->
+    <TextView
+        android:id="@+id/tvPermissionsLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:text="PERMISSIONS"
+        android:textColor="@color/grey_4"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold"
+        android:letterSpacing="0.08"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    <!-- Permission Row 1 -->
+    <LinearLayout
+        android:id="@+id/permRow1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPermissionsLabel">
+
+        <!-- Content chip -->
+        <LinearLayout
+            android:id="@+id/chipManageContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_9sdp">
+
+            <FrameLayout
+                android:id="@+id/iconWrapContent"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icManageContent"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/file" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvManageContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Content"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvManageContentSub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_9ssp"
+                    android:layout_marginTop="@dimen/_1sdp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dotContent"
+                android:layout_width="@dimen/_7sdp"
+                android:layout_height="@dimen/_7sdp" />
+        </LinearLayout>
+
+        <!-- Messages chip -->
+        <LinearLayout
+            android:id="@+id/chipManageMessages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_9sdp">
+
+            <FrameLayout
+                android:id="@+id/iconWrapMessages"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icManageMessages"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_message" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvManageMessages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Messages"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvManageMessagesSub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_9ssp"
+                    android:layout_marginTop="@dimen/_1sdp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dotMessages"
+                android:layout_width="@dimen/_7sdp"
+                android:layout_height="@dimen/_7sdp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Permission Row 2 -->
+    <LinearLayout
+        android:id="@+id/permRow2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:layout_marginBottom="@dimen/_14sdp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/permRow1"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Community chip -->
+        <LinearLayout
+            android:id="@+id/chipManageCommunity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_9sdp">
+
+            <FrameLayout
+                android:id="@+id/iconWrapCommunity"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icManageCommunity"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/group" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvManageCommunity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Community"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvManageCommunitySub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_9ssp"
+                    android:layout_marginTop="@dimen/_1sdp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dotCommunity"
+                android:layout_width="@dimen/_7sdp"
+                android:layout_height="@dimen/_7sdp" />
+        </LinearLayout>
+
+        <!-- Insights chip -->
+        <LinearLayout
+            android:id="@+id/chipViewInsights"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_9sdp">
+
+            <FrameLayout
+                android:id="@+id/iconWrapInsights"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icViewInsights"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_chart" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvViewInsights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Insights"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvViewInsightsSub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_9ssp"
+                    android:layout_marginTop="@dimen/_1sdp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dotInsights"
+                android:layout_width="@dimen/_7sdp"
+                android:layout_height="@dimen/_7sdp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

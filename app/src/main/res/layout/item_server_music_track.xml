@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="10dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Cover Image -->
+    <ImageView
+        android:id="@+id/serverTrackCover"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_music"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <!-- Play overlay icon (shown when selected) -->
+    <ImageView
+        android:id="@+id/serverTrackPlayIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_play_circle_outline"
+        android:visibility="gone"
+        app:tint="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@id/serverTrackCover"
+        app:layout_constraintEnd_toEndOf="@id/serverTrackCover"
+        app:layout_constraintTop_toTopOf="@id/serverTrackCover"
+        app:layout_constraintBottom_toBottomOf="@id/serverTrackCover"/>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/serverTrackTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toEndOf="@id/serverTrackCover"
+        app:layout_constraintEnd_toStartOf="@id/serverTrackDuration"
+        app:layout_constraintTop_toTopOf="@id/serverTrackCover"
+        app:layout_constraintBottom_toTopOf="@id/serverTrackArtist"/>
+
+    <!-- Artist + Genre -->
+    <TextView
+        android:id="@+id/serverTrackArtist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_3"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toEndOf="@id/serverTrackCover"
+        app:layout_constraintEnd_toStartOf="@id/serverTrackDuration"
+        app:layout_constraintTop_toBottomOf="@id/serverTrackTitle"
+        app:layout_constraintBottom_toBottomOf="@id/serverTrackCover"/>
+
+    <!-- Duration -->
+    <TextView
+        android:id="@+id/serverTrackDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_3"
+        android:textSize="12sp"
+        android:fontFamily="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

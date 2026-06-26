@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.CreateReelActivity">
+
+    <!-- Collapsible Top Section using AppBarLayout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <!-- Toolbar (always visible) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            app:layout_scrollFlags="noScroll">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="Back"
+                android:padding="6dp"
+                android:src="@drawable/outline_arrow_back_ios_24"
+                app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="New Reel"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/settingIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="Settings"
+                android:padding="6dp"
+                android:src="@drawable/setting_icon" />
+        </LinearLayout>
+
+        <!-- Scrollable action icons row -->
+        <HorizontalScrollView
+            android:id="@+id/horizontalScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:scrollbars="none"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Camera -->
+                <LinearLayout
+                    android:id="@+id/cameraView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/grey_1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_camera"
+                            app:tint="@color/black" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Camera"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Music -->
+                <LinearLayout
+                    android:id="@+id/musicView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/grey_1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_music"
+                            app:tint="@color/black" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Music"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Templates -->
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/templatesView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/grey_1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/cloud"
+                            app:tint="@color/black" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Templates"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Drafts -->
+                <LinearLayout
+                    android:id="@+id/draftsView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/grey_1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/draft"
+                            app:tint="@color/black" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Drafts"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Green Screen -->
+                <LinearLayout
+                    android:id="@+id/greenScreenView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/grey_1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/authentication"
+                            app:tint="@color/black" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Green Screen"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Effects -->
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/effectsView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_background"
+                        android:backgroundTint="@color/grey_1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/effect"
+                            app:tint="@color/black" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Effects"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:background="#E0E0E0"
+            app:layout_scrollFlags="noScroll" />
+
+        <!-- Gallery + Select Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp"
+            app:layout_scrollFlags="noScroll">
+
+            <!-- Custom Folder Dropdown trigger -->
+            <LinearLayout
+                android:id="@+id/folderDropdownTrigger"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/folderName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Gallery"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/dropdownArrow"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/ic_arrow_drop_down"
+                    app:tint="@color/black" />
+            </LinearLayout>
+
+            <!-- Select Multiple Button -->
+            <LinearLayout
+                android:id="@+id/multipleSelectBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/grey_1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="6dp"
+                    android:src="@drawable/gallery" />
+
+                <TextView
+                    android:id="@+id/selectBtnText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Select Multiple"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Grid -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/videoRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!-- Folder Dropdown Popup Overlay -->
+    <FrameLayout
+        android:id="@+id/dropdownOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#88000000"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/dropdownCard"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="104dp"
+            app:cardBackgroundColor="@color/color_white"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Dropdown header -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp"
+                    android:text="Choose Folder"
+                    android:textColor="#888"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#E0E0E0" />
+
+                <!-- Folder list -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/folderRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="280dp"
+                    android:overScrollMode="never" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

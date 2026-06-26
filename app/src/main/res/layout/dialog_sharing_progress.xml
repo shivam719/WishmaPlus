@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_dialog"
+    android:padding="28dp">
+
+    <!-- Animated icon -->
+    <ImageView
+        android:id="@+id/ivDialogIcon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/reels"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Progress -->
+    <ProgressBar
+        android:id="@+id/dialogProgress"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:indeterminateTint="@color/colorPrimary"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvDialogStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sharing your reel..."
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"/>
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/tvDialogSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please wait while we upload your content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginTop="6dp"/>
+
+</LinearLayout>

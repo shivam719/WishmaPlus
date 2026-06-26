@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_top"
+    android:paddingBottom="16dp">
+
+    <View
+        android:id="@+id/topLine"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_8sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/comment_bg" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Give task access"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Search box -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:padding="@dimen/_12sdp"
+        android:background="@drawable/bg_edittext"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icSearch"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_search"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@android:color/transparent"
+            android:hint="Search people by name"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icSearch"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Loading -->
+    <ProgressBar
+        android:id="@+id/progressSearch"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:indeterminate="true" />
+
+    <!-- Empty -->
+    <TextView
+        android:fontFamily="sans-serif-condensed-medium"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:id="@+id/tvNoResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:text="Search for people to give task access"
+        android:textColor="@color/grey_4"
+        android:visibility="visible" />
+
+    <!-- Results -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSuggested"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="380dp"
+        android:layout_marginTop="8dp"
+        android:nestedScrollingEnabled="true"
+        android:visibility="gone"
+        tools:listitem="@layout/item_suggested_user" />
+
+</LinearLayout>

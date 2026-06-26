@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PageAccess.ui.PageAccessActivity">
+
+  <!-- APP BAR -->
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/headerLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:elevation="3dp"
+      android:paddingStart="8dp"
+      android:paddingTop="10dp"
+      android:paddingEnd="16dp"
+      android:paddingBottom="10dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Back"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/outline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@android:color/black" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Page Access"
+        android:textColor="@color/colorPrimary"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnAddModerator"
+        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnAddModerator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_tab_selected"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="7dp"
+        android:text="+ Add"
+        android:textColor="#1877F2"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <View
+      android:id="@+id/headerDivider"
+      android:layout_width="0dp"
+      android:layout_height="0.5dp"
+      android:background="@color/grey_2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/headerLayout" />
+
+  <!-- INFO BANNER -->
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/infoBanner"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      android:layout_marginTop="12dp"
+      android:layout_marginEnd="12dp"
+      android:background="@drawable/bg_edittext"
+      android:paddingStart="14dp"
+      android:paddingTop="12dp"
+      android:paddingEnd="14dp"
+      android:paddingBottom="12dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/headerDivider">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icInfo"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/info_circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="People you add get access only to the tasks you allow. You can change or remove access any time."
+        android:textColor="@color/grey_5"
+        android:textSize="12sp"
+        android:lineSpacingExtra="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icInfo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <!-- PAGE ACCESS LABEL -->
+  <TextView
+      android:id="@+id/tvModeratorsLabel"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="16dp"
+      android:text="PEOPLE WITH PAGE ACCESS"
+      android:textColor="@color/grey_5"
+      android:textSize="11sp"
+      android:textStyle="bold"
+      android:letterSpacing="0.08"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/infoBanner" />
+
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+      android:id="@+id/swipeRefresh"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintTop_toBottomOf="@id/tvModeratorsLabel"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <!-- LOADING (page access) -->
+        <LinearLayout
+            android:id="@+id/loadingState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="48dp"
+            android:visibility="visible">
+
+          <ProgressBar
+              android:layout_width="36dp"
+              android:layout_height="36dp"
+              android:indeterminate="true" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:text="Loading people with page access…"
+              android:textColor="@color/grey_4"
+              android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- EMPTY (page access) -->
+        <LinearLayout
+            android:id="@+id/emptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="48dp"
+            android:visibility="gone">
+
+          <androidx.appcompat.widget.AppCompatImageView
+              android:layout_width="56dp"
+              android:layout_height="56dp"
+              android:alpha="0.35"
+              android:src="@drawable/user_icon" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="12dp"
+              android:gravity="center"
+              android:text="No one has page access yet"
+              android:textColor="@color/colorPrimary"
+              android:textSize="15sp"
+              android:textStyle="bold" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:gravity="center"
+              android:text="Tap + Add to give someone full access to manage this page."
+              android:textColor="@color/grey_4"
+              android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <!-- ERROR (page access) -->
+        <LinearLayout
+            android:id="@+id/errorState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="48dp"
+            android:visibility="gone">
+
+          <TextView
+              android:id="@+id/tvErrorMsg"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Could not load page access."
+              android:textColor="@color/grey_5"
+              android:textSize="13sp" />
+
+          <TextView
+              android:id="@+id/tvRetry"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:background="@drawable/bg_tab_selected"
+              android:paddingHorizontal="20dp"
+              android:paddingVertical="8dp"
+              android:text="Retry"
+              android:textColor="#1877F2"
+              android:textSize="13sp"
+              android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- LIST (page access) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvModerators"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:visibility="gone"
+            tools:listitem="@layout/item_moderator" />
+
+        <!-- Divider between sections -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/grey_1" />
+
+        <!-- TASK ACCESS HEADER + ADD -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/taskAccessHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp">
+
+          <TextView
+              android:id="@+id/tvTaskAccessLabel"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:text="PEOPLE WITH TASK ACCESS"
+              android:textColor="@color/grey_5"
+              android:textSize="11sp"
+              android:textStyle="bold"
+              android:letterSpacing="0.08"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toStartOf="@id/btnAddTaskAccess" />
+
+          <androidx.appcompat.widget.AppCompatTextView
+              android:id="@+id/btnAddTaskAccess"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/bg_tab_selected"
+              android:paddingHorizontal="14dp"
+              android:paddingVertical="6dp"
+              android:text="+ Add"
+              android:textColor="#1877F2"
+              android:textSize="12sp"
+              android:textStyle="bold"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- LOADING (task access) -->
+        <LinearLayout
+            android:id="@+id/loadingStateTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="48dp"
+            android:visibility="visible">
+
+          <ProgressBar
+              android:layout_width="36dp"
+              android:layout_height="36dp"
+              android:indeterminate="true" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:text="Loading people with task access…"
+              android:textColor="@color/grey_4"
+              android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- EMPTY (task access) -->
+        <LinearLayout
+            android:id="@+id/emptyStateTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="48dp"
+            android:visibility="gone">
+
+          <androidx.appcompat.widget.AppCompatImageView
+              android:layout_width="56dp"
+              android:layout_height="56dp"
+              android:alpha="0.35"
+              android:src="@drawable/user_icon" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="12dp"
+              android:gravity="center"
+              android:text="No one has task access yet"
+              android:textColor="@color/colorPrimary"
+              android:textSize="15sp"
+              android:textStyle="bold" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:gravity="center"
+              android:text="Tap + Add to give someone access to specific tasks on this page."
+              android:textColor="@color/grey_4"
+              android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <!-- ERROR (task access) -->
+        <LinearLayout
+            android:id="@+id/errorStateTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="48dp"
+            android:visibility="gone">
+
+          <TextView
+              android:id="@+id/tvErrorMsgTask"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Could not load task access."
+              android:textColor="@color/grey_5"
+              android:textSize="13sp" />
+
+          <TextView
+              android:id="@+id/tvRetryTask"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:background="@drawable/bg_tab_selected"
+              android:paddingHorizontal="20dp"
+              android:paddingVertical="8dp"
+              android:text="Retry"
+              android:textColor="#1877F2"
+              android:textSize="13sp"
+              android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- LIST (task access) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTaskAccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="24dp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:visibility="gone"
+            tools:listitem="@layout/item_moderator" />
+
+      </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

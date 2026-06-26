@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_bottom_sheet_day"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_peekHeight="600dp"
+        app:behavior_hideable="true">
+
+        <!-- Handle bar -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/bg_handle"/>
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_music"
+                android:layout_marginEnd="10dp"
+                app:tint="@color/colorPrimary"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Add Music"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17sp"
+                android:fontFamily="sans-serif-medium"/>
+
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_1"/>
+
+        <!-- Tab — Online / Device -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/musicTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_tab_container"
+            app:tabBackground="@drawable/bg_tab_selector_day"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabIndicatorHeight="0dp"
+            app:tabRippleColor="@null"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/blue"
+            app:tabPaddingStart="6dp"
+            app:tabPaddingEnd="6dp"
+            app:tabPaddingTop="4dp"
+            app:tabPaddingBottom="4dp">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Online"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Device"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <!-- Search bar -->
+        <FrameLayout
+            android:id="@+id/searchContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="10dp">
+
+            <EditText
+                android:id="@+id/musicSearchInput"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_search_day"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="10dp"
+                android:hint="Search songs, artists..."
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/grey_3"
+                android:textSize="13sp"
+                android:paddingHorizontal="16dp"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:singleLine="true"/>
+
+        </FrameLayout>
+
+        <!-- Progress bar -->
+        <ProgressBar
+            android:id="@+id/searchProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_12sdp"
+            android:visibility="gone"
+            android:indeterminate="true"
+            android:progressTint="@color/colorAccent"
+            android:progressBackgroundTint="@color/grey_1"/>
+
+        <!-- Empty view -->
+        <LinearLayout
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_music"
+                android:alpha="0.3"
+                android:layout_marginBottom="8dp"
+                app:tint="@color/grey_3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No music found"
+                android:textColor="@color/grey_3"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Try a different search term"
+                android:textColor="@color/grey_2"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
+
+        <!-- Track list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/musicTrackList"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:overScrollMode="never"
+            android:clipToPadding="false"
+            android:paddingHorizontal="8dp"
+            android:paddingBottom="8dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_1"/>
+
+        <!-- Trim + Apply panel -->
+        <LinearLayout
+            android:id="@+id/trimPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@color/bgColor"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="16dp">
+
+            <!-- Selected track row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_selected_track"
+                android:padding="10dp"
+                android:layout_marginBottom="14dp">
+
+                <FrameLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_music_disc"
+                    android:layout_marginEnd="12dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_music"
+                        app:tint="#FFFFFF"/>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvSelectedTrack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="13sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="No track selected"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tap play to preview"
+                        android:textColor="@color/grey_3"
+                        android:textSize="11sp"
+                        android:layout_marginTop="2dp"/>
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnPlayPreview"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_play_btn"
+                    android:src="@drawable/ic_play_circle_outline"
+                    android:padding="8dp"
+                    app:tint="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+            <!-- Trim label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trim Audio"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- Start row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:text="Start"
+                    android:textColor="@color/grey_3"
+                    android:textSize="12sp"/>
+
+                <SeekBar
+                    android:id="@+id/seekTrimStart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="1000"
+                    android:progress="0"
+                    android:progressTint="@color/colorPrimary"
+                    android:thumbTint="@color/colorPrimary"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvTrimStart"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:text="0:00"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp"
+                    android:fontFamily="monospace"
+                    android:gravity="end"/>
+
+            </LinearLayout>
+
+            <!-- End row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:text="End"
+                    android:textColor="@color/grey_3"
+                    android:textSize="12sp"/>
+
+                <SeekBar
+                    android:id="@+id/seekTrimEnd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="1000"
+                    android:progress="1000"
+                    android:progressTint="@color/colorAccent"
+                    android:thumbTint="@color/colorAccent"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvTrimEnd"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:text="0:30"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp"
+                    android:fontFamily="monospace"
+                    android:gravity="end"/>
+
+            </LinearLayout>
+
+            <!-- Apply button -->
+            <Button
+                android:id="@+id/btnApplyMusic"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Use This Music"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                android:backgroundTint="@color/colorPrimary"
+                android:visibility="gone"
+                android:letterSpacing="0.03"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

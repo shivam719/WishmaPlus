@@ -1,0 +1,60 @@
+package com.infotech.wishmaplus.Activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.ImageView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.bumptech.glide.Glide;
+import com.infotech.wishmaplus.R;
+import com.infotech.wishmaplus.Utils.PreferencesManager;
+import com.infotech.wishmaplus.Utils.UtilMethods;
+
+public class SwitchPages extends AppCompatActivity {
+    ImageView imageView;
+
+    AppCompatTextView pageName;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_switch_pages);
+        EdgeToEdge.enable(this);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        PreferencesManager tokenManager = new PreferencesManager(this, 1);
+        imageView = findViewById(R.id.profileImage);
+        pageName = findViewById(R.id.tvUserName);
+        String imageUrl = getIntent().getStringExtra("imageUrl");
+        String name = getIntent().getStringExtra("pageName");
+        String pageId = getIntent().getStringExtra("pageId");
+        boolean isProfile = getIntent().getBooleanExtra("isProfile",false);
+        tokenManager.set("ACTIVE_PAGE_ID", pageId);
+        tokenManager.setNonRemoval("PROFILE_TYPE", isProfile);
+
+        pageName.setText(name);
+        Glide.with(this)
+                .load(imageUrl)
+                .apply(UtilMethods.INSTANCE.getRequestOption_With_UserIcon())
+                .into(imageView);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            Intent intent = new Intent(SwitchPages.this, MainActivity.class);
+            intent.putExtra("pageId",pageId);
+            intent.putExtra("isProfile",isProfile);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }, 1000);
+
+    }
+}

@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Fragments.MoreFragment">
+
+        <RelativeLayout
+            android:id="@+id/profileView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/comment_bg"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/nameTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/user_icon" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nameTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/userArrow"
+                android:layout_toEndOf="@id/profileIcon"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:textColor="@android:color/black" />
+<!--Static Gone-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/currentPackageLabel"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_below="@id/nameTv"
+                android:layout_alignBottom="@id/profileIcon"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toEndOf="@id/profileIcon"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center_vertical|top"
+                android:text="@string/current_package_"
+                android:textColor="@color/grey_6" />
+            <!--Static Gone-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/currentPackage"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameTv"
+                android:layout_alignTop="@id/currentPackageLabel"
+                android:layout_alignBottom="@id/currentPackageLabel"
+                android:layout_toStartOf="@id/userArrow"
+                android:layout_toEndOf="@id/currentPackageLabel"
+                android:ellipsize="end"
+                android:visibility="gone"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center_vertical|top"
+                android:maxLines="1"
+                android:textColor="@android:color/holo_green_dark" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/userArrow"
+                android:background="@drawable/circle_background"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_drop_down" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/reelsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/reelsIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/reelsTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_package" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reelsTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/reelsArrow"
+                android:layout_toEndOf="@id/reelsIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Reels"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reelsNoteTv"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reelsTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/reelsArrow"
+                android:layout_toEndOf="@id/reelsIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Create stunning reels and share your creativity with the world."
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/reelsArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+        <RelativeLayout
+            android:id="@+id/packageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/packageIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/packageTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_package" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/packageTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/packageArrow"
+                android:layout_toEndOf="@id/packageIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/subscription_packages"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/packageNoteTv"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/packageTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/packageArrow"
+                android:layout_toEndOf="@id/packageIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Upgrade package to unlock different features."
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/packageArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+
+        <RelativeLayout
+            android:id="@+id/referralView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/referralIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/referralTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_refer_earn" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/referralTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/referralArrow"
+                android:layout_toEndOf="@id/referralIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/referral"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/referralNoteTv"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/referralTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/referralArrow"
+                android:layout_toEndOf="@id/referralIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Send a referral link to invite your friends."
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/referralArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+
+        <RelativeLayout
+            android:id="@+id/levelCountView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/levelCountIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/levelCountTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_my_team" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/levelCountTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/levelCountArrow"
+                android:layout_toEndOf="@id/levelCountIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/my_follower"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/levelCountNoteTv"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/levelCountTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/levelCountArrow"
+                android:layout_toEndOf="@id/levelCountIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="You can view activate and deactivate user according level wise"
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/levelCountArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+
+        <RelativeLayout
+            android:id="@+id/contactUsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/contactUsIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/contactUsTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_contact_us" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contactUsTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/contactUsArrow"
+                android:layout_toEndOf="@id/contactUsIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/contact_us"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contactUsNoteTv"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contactUsTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/contactUsArrow"
+                android:layout_toEndOf="@id/contactUsIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="You can connect with our support team if you have any query or issue"
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/contactUsArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+         <RelativeLayout
+            android:id="@+id/incomeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+             android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/incomeIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/incomeTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/payu_wallet" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/incomeTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/incomeArrow"
+                android:layout_toEndOf="@id/incomeIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/income_report"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/incomeTvDes"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/incomeTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/incomeArrow"
+                android:layout_toEndOf="@id/incomeIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/you_can_view_your_income_details_here"
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/incomeArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+
+        <RelativeLayout
+            android:id="@+id/groupView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/groupIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/groupTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_users" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/groupTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/groupArrow"
+                android:layout_toEndOf="@id/groupIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/groups"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/groupTvDes"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/groupTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/groupArrow"
+                android:layout_toEndOf="@id/groupIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/you_can_view_and_manage_your_groups_here"
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/groupArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+
+        <RelativeLayout
+            android:id="@+id/professionalView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/professionalIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/professionalTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/tools" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/professionalTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/professionalArrow"
+                android:layout_toEndOf="@id/professionalIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Professional Dashboard"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/professionalTvDes"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/professionalTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/professionalArrow"
+                android:layout_toEndOf="@id/professionalIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="You can view and manage your professional dashboard from here."
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/professionalArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+
+        <View
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+        <RelativeLayout
+            android:id="@+id/adsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/adsIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/adsTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@android:color/black"
+                app:srcCompat="@drawable/ic_calendar" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/adsTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/adsArrow"
+                android:layout_toEndOf="@id/adsIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Ad Center"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/adsTvDes"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/adsTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/adsArrow"
+                android:layout_toEndOf="@id/adsIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Promote your content to more users"
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/adsArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+        <RelativeLayout
+            android:id="@+id/settingView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/settingIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/settingTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@android:color/black"
+                app:srcCompat="@drawable/setting_icon" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/settingTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/settingArrow"
+                android:layout_toEndOf="@id/settingIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Settings &amp; Privacy"
+                android:textColor="@android:color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/settingTvDes"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settingTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/settingArrow"
+                android:layout_toEndOf="@id/settingIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="Manage your settings &amp; privacy from here."
+                android:textColor="@color/grey_4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/settingArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+        <RelativeLayout
+            android:id="@+id/logoutView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoutIcon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toStartOf="@id/logoutTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_logout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/logoutTv"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toStartOf="@id/logoutArrow"
+                android:layout_toEndOf="@id/logoutIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/log_out"
+                android:textColor="@color/red" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/logoutTvDes"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logoutTv"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toStartOf="@id/logoutArrow"
+                android:layout_toEndOf="@id/logoutIcon"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@string/log_out_from_this_device"
+                android:textColor="@color/red_text" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoutArrow"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:tint="@color/red"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </RelativeLayout>
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likeBtn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/term_and_privacy_txt"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center|bottom"
+            android:paddingBottom="@dimen/_20sdp"
+            android:text="@string/termandprivacy"
+            android:textColor="@color/grey_5" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

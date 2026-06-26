@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bgColor">
+
+    <!-- TOP TOOLBAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="12dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/colorPrimary"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:text="Create Reel"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnPost"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="Share"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:background="@drawable/btn_share_bg_day"
+            android:stateListAnimator="@null"/>
+
+    </LinearLayout>
+
+    <!-- SCROLLABLE CONTENT -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:background="@color/bgColor">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- White card — User + Caption + Thumbnail -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="14dp"
+                android:elevation="2dp"
+                android:padding="14dp">
+
+                <!-- User Info Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_bg">
+
+                        <ImageView
+                            android:id="@+id/ivUserAvatar"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:scaleType="centerCrop"
+                            android:clipToOutline="true"
+                            android:src="@drawable/user_icon"
+                            android:background="@drawable/circle_bg"
+                            android:contentDescription="Avatar"/>
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:id="@+id/tvUserName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Your Name"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp"
+                            android:fontFamily="sans-serif-medium"/>
+
+                        <LinearLayout
+                            android:id="@+id/llAudience"
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="@drawable/audience_bg_day"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="5dp"
+                            android:layout_marginTop="3dp"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <ImageView
+                                android:layout_width="11dp"
+                                android:layout_height="11dp"
+                                android:src="@drawable/user_icon"
+                                android:layout_marginEnd="3dp"
+                                android:contentDescription="public"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Public"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="11sp"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <ImageView
+                                android:layout_width="13dp"
+                                android:layout_height="13dp"
+                                android:src="@drawable/ic_arrow_drop_down"
+                                app:tint="@color/colorPrimary"
+                                android:layout_marginStart="1dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Caption + Thumbnail -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="top">
+
+                    <EditText
+                        android:id="@+id/etCaption"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="100dp"
+                        android:gravity="top"
+                        android:hint="Write a caption…"
+                        android:textColorHint="@color/grey_3"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="3dp"
+                        android:background="@null"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLines="6"
+                        android:paddingEnd="10dp"/>
+
+                    <!-- Thumbnail -->
+                    <FrameLayout
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_120sdp"
+                        android:background="@drawable/bg_thumb_day">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="Thumbnail"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/gradient_bottom"/>
+
+                        <TextView
+                            android:id="@+id/tvDurationBadge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|end"
+                            android:layout_margin="5dp"
+                            android:text="0:00"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:background="@drawable/duration_badge_bg"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- HASHTAG SECTION — white card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="14dp"
+                android:elevation="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="8dp">
+
+                <!-- Input row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="12dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_tag"
+                        app:tint="@color/colorPrimary"
+                        android:layout_marginEnd="14dp"/>
+
+                    <EditText
+                        android:id="@+id/etHashtag"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Search hashtags…"
+                        android:textColorHint="@color/grey_3"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        android:background="@null"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"/>
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_1"
+                    android:layout_marginHorizontal="16dp"/>
+
+                <!-- Suggestions -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHashtagSuggestions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="4dp"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone"/>
+
+                <!-- Chips -->
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupHashtags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="50dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="6dp"
+                    app:chipSpacingHorizontal="4dp"
+                    app:chipSpacingVertical="2dp"/>
+
+            </LinearLayout>
+
+            <!-- OPTIONS CARD -->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="14dp"
+                android:elevation="2dp">
+
+                <!-- Share to Feed toggle -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_filter"
+                        app:tint="@color/colorPrimary"
+                        android:layout_marginEnd="14dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Also share to Feed"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchShareToFeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_1"
+                    android:layout_marginHorizontal="16dp"/>
+
+                <!-- Location Row -->
+                <LinearLayout
+                    android:id="@+id/llLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_location"
+                        app:tint="@color/colorPrimary"
+                        android:layout_marginEnd="14dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tag location"
+                        android:textColor="@color/grey_3"
+                        android:textSize="15sp"/>
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="@color/grey_2"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_1"
+                    android:layout_marginHorizontal="16dp"/>
+
+                <!-- Tag People Row -->
+                <LinearLayout
+                    android:id="@+id/llTagPeople"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/add_user"
+                        app:tint="@color/colorPrimary"
+                        android:layout_marginEnd="14dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tag people"
+                        android:textColor="@color/grey_3"
+                        android:textSize="15sp"/>
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="@color/grey_2"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- PROGRESS BAR -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorAccent"
+        android:visibility="gone"/>
+
+</LinearLayout>

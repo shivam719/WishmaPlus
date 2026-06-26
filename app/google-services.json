@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "789309115643",
+    "project_id": "wishma-plus",
+    "storage_bucket": "wishma-plus.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789309115643:android:a9c7b78fbe63001446345e",
+        "android_client_info": {
+          "package_name": "com.infotech.wishmaplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789309115643-j7brbm5rttmun7m2jbshl9p2o5gpc0n5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbpGvIkTns6LBn3BV5LxaeebX3Rpq_kMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789309115643-j7brbm5rttmun7m2jbshl9p2o5gpc0n5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,604 @@
+package com.infotech.wishmaplus.Activity;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.VideoView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.FileProvider;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.infotech.wishmaplus.Adapter.BillingDetailsAdapter;
+import com.infotech.wishmaplus.Api.Response.BoostBillingResponse;
+import com.infotech.wishmaplus.Api.Response.GetContentDetailsToBoostResponse;
+import com.infotech.wishmaplus.Api.Response.InsightsStatsResponse;
+import com.infotech.wishmaplus.BuildConfig;
+import com.infotech.wishmaplus.R;
+import com.infotech.wishmaplus.Utils.CustomLoader;
+import com.infotech.wishmaplus.Utils.UtilMethods;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import okhttp3.ResponseBody;
+
+public class PostDetails extends AppCompatActivity {
+
+    PieChart pieChart;
+    private CustomLoader loader;
+    GetContentDetailsToBoostResponse getContentDetailsToBoostResponse = new GetContentDetailsToBoostResponse();
+    InsightsStatsResponse insightsStatsResponse = new InsightsStatsResponse();
+    AppCompatImageView profile,containerImage;
+    AppCompatTextView nameTv,timeTv,postTxt;
+    View containerVideo;
+    VideoView videoView;
+    String postId ="";
+    LineChart lineChart;
+    TextView tvViews,viewsValue,tvEarning,earnValue,tvEngage,engageValue,tvClick,clickValue,totalViewer,tvReactions,tvComments,tvShares,tvClicks,notEnoughData,billingDetails;
+    RecyclerView recyclerView;
+    BillingDetailsAdapter adapter;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_post_details);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        postId = getIntent().getStringExtra("postId");
+        findViewById(R.id.back_button).setOnClickListener(v -> finish());
+        lineChart = findViewById(R.id.lineChart);
+        pieChart = findViewById(R.id.pieChart);
+        loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar);
+        profile = findViewById(R.id.profile);
+        nameTv = findViewById(R.id.nameTv);
+        timeTv = findViewById(R.id.timeTv);
+        postTxt = findViewById(R.id.postTxt);
+        containerVideo = findViewById(R.id.containerVideo);
+        videoView = findViewById(R.id.videoView);
+        containerImage = findViewById(R.id.containerImage);
+        tvViews = findViewById(R.id.tvViews);
+        viewsValue = findViewById(R.id.viewsValue);
+        tvEarning = findViewById(R.id.tvEarning);
+        earnValue = findViewById(R.id.earnValue);
+        tvEngage = findViewById(R.id.tvEngage);
+        tvEngage = findViewById(R.id.tvEngage);
+        engageValue = findViewById(R.id.engageValue);
+        tvClick = findViewById(R.id.tvClick);
+        clickValue = findViewById(R.id.clickValue);
+        totalViewer = findViewById(R.id.totalViewer);
+        tvReactions = findViewById(R.id.tvReactions);
+        tvComments = findViewById(R.id.tvComments);
+        tvShares = findViewById(R.id.tvShares);
+        tvClicks = findViewById(R.id.tvClicks);
+        notEnoughData = findViewById(R.id.notEnoughData);
+        billingDetails = findViewById(R.id.billingDetails);
+        recyclerView = findViewById(R.id.recyclerView);
+        getContentDetailsToBoostResponse(postId);
+        getPostStats(postId);
+        getBoostBillingInfo(postId);
+        setupPieChart();
+
+    }
+    public void setupLineChart(){
+        /* DATA POINTS (replicates the spikes in image) */
+        List<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(0, 0));
+        entries.add(new Entry(1, 0));
+        entries.add(new Entry(2, 0));
+        entries.add(new Entry(3, 6));   // Nov 25 spike
+        entries.add(new Entry(4, 0));
+        entries.add(new Entry(5, 0));
+        entries.add(new Entry(6, 0));
+        entries.add(new Entry(7, 0));
+        entries.add(new Entry(8, 1));   // Dec 9 small spike
+        entries.add(new Entry(9, 0));
+        entries.add(new Entry(10, 5));  // Dec 10 spike
+        entries.add(new Entry(11, 0));
+
+        LineDataSet dataSet = new LineDataSet(entries, "");
+        dataSet.setColor(Color.parseColor("#1A73E8"));
+        dataSet.setLineWidth(2f);
+        dataSet.setDrawCircles(false);
+        dataSet.setDrawValues(false);
+        dataSet.setMode(LineDataSet.Mode.LINEAR);
+
+        /* NO FILL */
+        dataSet.setDrawFilled(false);
+
+        LineData lineData = new LineData(dataSet);
+        lineChart.setData(lineData);
+
+        /* CHART SETTINGS */
+        lineChart.getDescription().setEnabled(false);
+        lineChart.getLegend().setEnabled(false);
+        lineChart.setTouchEnabled(false);
+        lineChart.setScaleEnabled(false);
+        lineChart.setPinchZoom(false);
+
+        /* X AXIS */
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setTextColor(Color.GRAY);
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return switch ((int) value) {
+                    case 0 -> "Nov 18";
+                    case 1 -> "Nov 21";
+                    case 2 -> "Nov 24";
+                    case 3 -> "Nov 27";
+                    case 4 -> "Nov 30";
+                    case 5 -> "Dec 3";
+                    case 6 -> "Dec 6";
+                    case 7 -> "Dec 9";
+                    case 8 -> "Dec 12";
+                    case 9 -> "Dec 15";
+                    case 10 -> "Dec 18";
+                    case 11 -> "Dec 21";
+                    default -> "";
+                };
+            }
+        });
+
+        /* Y AXIS */
+        YAxis leftAxis = lineChart.getAxisLeft();
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setDrawGridLines(true);
+        leftAxis.setGridColor(Color.parseColor("#EEEEEE"));
+        leftAxis.setTextColor(Color.GRAY);
+
+        lineChart.getAxisRight().setEnabled(false);
+
+        /* REFRESH */
+        lineChart.invalidate();
+    }
+    public void setupLineChart(List<InsightsStatsResponse.InsightDateWise> insightsDateWise) {
+
+        // Safety check
+        if (insightsDateWise == null || insightsDateWise.isEmpty()) {
+            lineChart.clear();
+            return;
+        }
+
+        List<Entry> entries = new ArrayList<>();
+        List<String> xLabels = new ArrayList<>();
+        entries.add(new Entry(0, 0));
+        xLabels.add(minusDaysFromDate(insightsDateWise.get(0).getInsightDate(), -7)); // 👈 SAME API DATE FORMAT
+        // Convert API data to chart entries
+
+
+
+        for (int i = 0; i < insightsDateWise.size(); i++) {
+            InsightsStatsResponse.InsightDateWise item = insightsDateWise.get(i);
+            Log.e("TAG", "setupLineChart: "+insightsDateWise.size() );
+            entries.add(new Entry(i+1, item.getInsightCount()));
+            xLabels.add(item.getInsightDate()); // 👈 SAME API DATE FORMAT
+        }
+        entries.add(new Entry(2, 0));
+        xLabels.add(minusDaysFromDate(insightsDateWise.get(insightsDateWise.size()-1).getInsightDate(), 7));
+
+        // Dataset
+        LineDataSet dataSet = new LineDataSet(entries, "");
+        dataSet.setColor(Color.parseColor("#1A73E8"));
+        dataSet.setLineWidth(2f);
+        dataSet.setDrawCircles(false);
+        dataSet.setDrawValues(false);
+        dataSet.setMode(LineDataSet.Mode.LINEAR);
+        dataSet.setDrawFilled(false);
+
+        LineData lineData = new LineData(dataSet);
+        lineChart.setData(lineData);
+
+        // Chart settings
+        lineChart.getDescription().setEnabled(false);
+        lineChart.getLegend().setEnabled(false);
+        lineChart.setTouchEnabled(false);
+        lineChart.setScaleEnabled(false);
+        lineChart.setPinchZoom(false);
+
+        // X Axis
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setTextColor(Color.GRAY);
+        xAxis.setGranularity(1f);
+//        xAxis.setLabelRotationAngle(-45f); // optional, helps avoid overlap
+
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                int index = (int) value;
+                return (index >= 0 && index < xLabels.size())
+                        ? xLabels.get(index)
+                        : "";
+            }
+        });
+
+        // Y Axis
+        YAxis leftAxis = lineChart.getAxisLeft();
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setDrawGridLines(true);
+        leftAxis.setGridColor(Color.parseColor("#EEEEEE"));
+        leftAxis.setTextColor(Color.GRAY);
+
+        lineChart.getAxisRight().setEnabled(false);
+
+        // Refresh chart
+        lineChart.invalidate();
+    }
+
+    public void getContentDetailsToBoostResponse(String postId){
+        loader.show();
+        UtilMethods.INSTANCE.getContentDetailsToBoost(postId, new UtilMethods.ApiCallBackMulti() {
+            @Override
+            public void onSuccess(Object object) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+                getContentDetailsToBoostResponse =(GetContentDetailsToBoostResponse) object;
+                if(getContentDetailsToBoostResponse.getStatusCode()==1){
+                    GetContentDetailsToBoostResponse.PostInsights postInsights = getContentDetailsToBoostResponse.getPostInsights();
+                    Glide.with(PostDetails.this).load(postInsights.getProfilePictureUrl()).placeholder(R.drawable.user_icon).into(profile);
+                    nameTv.setText(postInsights.getUserName());
+                    timeTv.setText(postInsights.getCreatedDate());
+                    if(postInsights.getCaption()!=null) {
+                        postTxt.setText(postInsights.getCaption());
+                    }
+                    if(postInsights.getContentTypeId()==1){//text
+                        containerVideo.setVisibility(GONE);
+                        containerImage.setVisibility(GONE);
+                    }
+                    else if(postInsights.getContentTypeId()==2) {//video
+                        containerVideo.setVisibility(VISIBLE);
+                        containerImage.setVisibility(GONE);
+                        videoView.setVideoPath(postInsights.getPostContent());
+                    }
+                    else if(postInsights.getContentTypeId()==3) {//IMAGE
+                        containerVideo.setVisibility(GONE);
+                        containerImage.setVisibility(VISIBLE);
+                        Glide.with(PostDetails.this).load(postInsights.getPostContent()).placeholder(R.drawable.app_logo).into(containerImage);
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+
+            }
+        });
+    }
+    public void getPostStats(String postId){
+        loader.show();
+        UtilMethods.INSTANCE.getPostStats(postId,0, new UtilMethods.ApiCallBackMulti() {
+            @Override
+            public void onSuccess(Object object) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+                insightsStatsResponse =(InsightsStatsResponse) object;
+                if(insightsStatsResponse.getStatusCode()==1){
+                    if(insightsStatsResponse.getResult().getInsightsDateWise().size()>1){
+                        setupLineChart(insightsStatsResponse.getResult().getInsightsDateWise());
+                        notEnoughData.setVisibility(GONE);
+                        lineChart.setVisibility(VISIBLE);
+                    }else{
+                        notEnoughData.setVisibility(VISIBLE);
+                        lineChart.setVisibility(GONE);
+                    }
+
+                    viewsValue.setText(insightsStatsResponse.getResult().getTotalInsights().getTotalViews()+"");
+                    earnValue.setText(insightsStatsResponse.getResult().getTotalInsights().getTotalEarning()+"");
+                    engageValue.setText(insightsStatsResponse.getResult().getTotalInsights().getEngagement()+"");
+                    clickValue.setText(insightsStatsResponse.getResult().getTotalInsights().getClick()+"");
+                    totalViewer.setText(insightsStatsResponse.getResult().getTotalInsights().getTotalViews()+"");
+                    tvReactions.setText(insightsStatsResponse.getResult().getTotalInsights().getTotalLikes()+"");
+                    tvComments.setText(insightsStatsResponse.getResult().getTotalInsights().getTotalComments()+"");
+                    tvShares.setText(insightsStatsResponse.getResult().getTotalInsights().getTotalShares()+"");
+                    tvClicks.setText(insightsStatsResponse.getResult().getTotalInsights().getClick()+"");
+                }
+
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+
+            }
+        });
+    }
+    public void getBoostBillingInfo(String postId){
+        loader.show();
+        UtilMethods.INSTANCE.getBoostBillingInfo(postId, new UtilMethods.ApiCallBackMulti() {
+            @Override
+            public void onSuccess(Object object) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+                BoostBillingResponse boostBillingResponse =(BoostBillingResponse) object;
+                if(boostBillingResponse.getStatusCode()==1){
+                    if(!boostBillingResponse.getResult().isEmpty()){
+                        billingDetails.setVisibility(VISIBLE);
+                        recyclerView.setVisibility(VISIBLE);
+                        recyclerView.setLayoutManager(
+                                new LinearLayoutManager(PostDetails.this));
+
+                        adapter = new BillingDetailsAdapter(
+                                PostDetails.this,
+                                boostBillingResponse.getResult(), new BillingDetailsAdapter.OnAdapterButtonsClick() {
+                            @Override
+                            public void onDownloadClick(BoostBillingResponse.Result item, int position) {
+                                getDownloadBillingPdf(item.getBoostId());
+                            }
+                        } // API result list
+                        );
+
+                        recyclerView.setAdapter(adapter);
+                    }else{
+                        billingDetails.setVisibility(GONE);
+                        recyclerView.setVisibility(GONE);
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+
+            }
+        });
+    }
+
+    public void getDownloadBillingPdf(int boostId){
+        loader.show();
+        UtilMethods.INSTANCE.getDownloadBillingPdf(boostId, new UtilMethods.ApiCallBackMulti() {
+            @Override
+            public void onSuccess(Object object) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+                ResponseBody responseBody =(ResponseBody) object;
+                new SaveAndViewPdfTaskUser().execute(responseBody);
+
+
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                if (loader != null) {
+                    if (loader.isShowing()) {
+                        loader.dismiss();
+                    }
+                }
+
+            }
+        });
+    }
+    private void setupPieChart() {
+
+        List<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(41f));
+        entries.add(new PieEntry(59f));
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(
+                Color.parseColor("#1E88E5"), // Followers
+                Color.parseColor("#0D47A1")  // Non-followers
+        );
+        dataSet.setDrawValues(false);
+
+        PieData pieData = new PieData(dataSet);
+
+        pieChart.setData(pieData);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleRadius(70f);
+        pieChart.setTransparentCircleRadius(0f);
+        pieChart.setHoleColor(Color.WHITE);
+
+        pieChart.setRotationEnabled(false);
+        pieChart.setHighlightPerTapEnabled(false);
+
+        pieChart.invalidate(); // refresh
+    }
+    private class SaveAndViewPdfTaskUser extends AsyncTask<ResponseBody, Void, File> {
+
+        @Override
+        protected File doInBackground(ResponseBody... params) {
+            try {
+                ResponseBody body = params[0];
+                File pdfFile = savePdfToFileUser(body);
+                return pdfFile;
+            } catch (IOException e) {
+                Log.e("SaveAndViewPdfTask", "IOException: " + e.getMessage());
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(File pdfFile) {
+            if (pdfFile != null) {
+                Toast.makeText(PostDetails.this, "Downloaded successfully", Toast.LENGTH_SHORT).show();
+                sendNotification(pdfFile);
+            } else {
+                Toast.makeText(PostDetails.this, "Failed to save PDF", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public static String minusDaysFromDate(String dateStr, int daysToMinus) {
+        try {
+            SimpleDateFormat sdf =
+                    new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+
+            Date date = sdf.parse(dateStr);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.DAY_OF_MONTH, daysToMinus);
+
+            return sdf.format(calendar.getTime());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return dateStr; // fallback
+        }
+    }
+    private File savePdfToFileUser(ResponseBody body) throws IOException {
+        // Current Date-Time for unique filename
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.getDefault()).format(new Date());
+        String fileName = "Billing_" + timeStamp + ".pdf";
+
+        // Save in Public Downloads folder
+        File pdfFile = new File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                fileName
+        );
+
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+
+        try {
+            byte[] fileReader = new byte[4096];
+            inputStream = body.byteStream();
+            outputStream = new FileOutputStream(pdfFile);
+
+            int read;
+            while ((read = inputStream.read(fileReader)) != -1) {
+                outputStream.write(fileReader, 0, read);
+            }
+
+            outputStream.flush();
+
+            // Media scanner notify so file shows immediately in Downloads app
+            MediaScannerConnection.scanFile(
+                    this,
+                    new String[]{pdfFile.getAbsolutePath()},
+                    new String[]{"application/pdf"},
+                    null
+            );
+
+            return pdfFile;
+        } finally {
+            if (inputStream != null) inputStream.close();
+            if (outputStream != null) outputStream.close();
+        }
+    }
+    private void sendNotification(File pdfFile) {
+        Uri fileUri = FileProvider.getUriForFile(
+                this,
+                BuildConfig.APPLICATION_ID + ".provider_smart_image_picker",
+                pdfFile);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(fileUri, "application/pdf");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE
+        );
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
+                .setSmallIcon(R.drawable.arrow_downward)
+                .setContentTitle("Download Complete")
+                .setContentText("File downloaded successfully")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            channel = new NotificationChannel(
+                    "channel_id",
+                    "Download Notifications",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            manager.createNotificationChannel(channel);
+        }
+        manager.notify(0, builder.build());
+    }
+}

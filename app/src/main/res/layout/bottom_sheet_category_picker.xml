@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/_16sdp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_8sdp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Select Category"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tv_selected_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/3 selected"
+            android:textSize="13sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginEnd="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:padding="@dimen/_4sdp" />
+    </LinearLayout>
+
+    <!-- Search -->
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_search_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:background="@drawable/edittext_bg"
+        android:hint="Search categories..."
+        android:padding="@dimen/_12sdp"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="@dimen/_8sdp"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textColorHint="@android:color/darker_gray" />
+
+    <!-- List — capped so sheet doesn't overfill screen -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="360dp"
+        android:nestedScrollingEnabled="true"
+        android:overScrollMode="never" />
+
+</LinearLayout>

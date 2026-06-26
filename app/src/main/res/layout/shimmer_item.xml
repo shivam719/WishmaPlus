@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/shimmer_item.xml -->
+<!-- Add Wishma Plus Shimmer library to build.gradle:
+     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+-->
+<com.facebook.shimmer.ShimmerFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shimmerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:shimmer_auto_start="true"
+    app:shimmer_base_color="#767474"
+    app:shimmer_highlight_color="#767474"
+    app:shimmer_duration="1200">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Profile Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <!-- Avatar placeholder -->
+            <View
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:backgroundTint="#767474"
+                android:background="@drawable/shimmer_circle_bg"
+                android:layout_marginEnd="12dp" />
+
+            <!-- Name + time placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="140dp"
+                    android:layout_height="14dp"
+                    android:backgroundTint="#767474"
+                    android:background="@drawable/shimmer_rounded_bg"
+                    android:layout_marginBottom="8dp" />
+
+                <View
+                    android:backgroundTint="#767474"
+                    android:layout_width="90dp"
+                    android:layout_height="11dp"
+                    android:background="@drawable/shimmer_rounded_bg" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Caption line 1 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:backgroundTint="#767474"
+            android:background="@drawable/shimmer_rounded_bg"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Caption line 2 (shorter) -->
+        <View
+            android:layout_width="220dp"
+            android:layout_height="13dp"
+            android:backgroundTint="#767474"
+            android:background="@drawable/shimmer_rounded_bg"
+            android:layout_marginBottom="14dp" />
+
+        <!-- Media placeholder (image/video area) -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:backgroundTint="#767474"
+            android:background="@drawable/shimmer_rounded_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Action buttons row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <View
+                android:layout_width="70dp"
+                android:layout_height="32dp"
+                android:backgroundTint="#767474"
+                android:background="@drawable/shimmer_rounded_bg"
+                android:layout_marginEnd="10dp" />
+
+            <View
+                android:layout_width="70dp"
+                android:layout_height="32dp"
+                android:backgroundTint="#767474"
+                android:background="@drawable/shimmer_rounded_bg"
+                android:layout_marginEnd="10dp" />
+
+            <View
+                android:layout_width="70dp"
+                android:layout_height="32dp"
+                android:backgroundTint="#767474"
+                android:background="@drawable/shimmer_rounded_bg" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

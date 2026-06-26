@@ -1,0 +1,2044 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- APP BAR                                                         -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Back button -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle_background"
+            android:contentDescription="Back"
+            android:padding="10dp"
+            android:src="@drawable/outline_arrow_back_ios_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#1C1E21" />
+
+        <!-- Title -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/user_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Professional dashboard"
+            android:textColor="#1C1E21"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_refresh"
+            app:layout_constraintStart_toEndOf="@id/back_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Refresh button -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle_background"
+            android:contentDescription="Refresh"
+            android:padding="10dp"
+            android:src="@drawable/ic_refresh"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#1C1E21" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- TOP NAV TABS  (Analytics / Content)                            -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <HorizontalScrollView
+        android:id="@+id/horizontalTabs"
+        android:layout_width="407dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="@dimen/_12sdp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+        <LinearLayout
+            android:id="@+id/tabsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/analytics_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_selected_bg"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:text="Analytics"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/content_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/tab_selected_bg"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:text="Content"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/community_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/tab_selected_bg"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:text="Community"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/monetization_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/tab_selected_bg"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:text="Monetisation"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Bottom shadow line under tabs -->
+    <View
+        android:id="@+id/tabShadow"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="#E4E6EA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontalTabs" />
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- MAIN SCROLL                                                     -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabShadow">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/mainScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- PROFILE CARD                                -->
+                <!-- ─────────────────────────────────────────── -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/profileCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rectangle"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingTop="@dimen/_15sdp"
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <!-- Profile Image -->
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_background"
+                        android:clipToOutline="true"
+                        android:outlineProvider="background"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/user_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Verified Badge -->
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/verified_badge"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/badge_white_circle"
+                        android:elevation="6dp"
+                        android:padding="2dp"
+                        android:src="@drawable/correct"
+                        android:translationX="2dp"
+                        android:translationY="2dp"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_image"
+                        app:layout_constraintEnd_toEndOf="@id/profile_image" />
+
+                    <!-- Name -->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Shivam Kumar Tiwari"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/profile_image"
+                        app:layout_constraintTop_toTopOf="@id/profile_image" />
+
+                    <!-- Weekly Progress Label -->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weekly_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="Weekly progress"
+                        android:textColor="#666"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@id/profile_image"
+                        app:layout_constraintTop_toBottomOf="@id/profile_name" />
+
+                    <!-- Percentage -->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="0%"
+                        android:textColor="#000"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@id/weekly_progress"
+                        app:layout_constraintStart_toEndOf="@id/weekly_progress"
+                        app:layout_constraintTop_toTopOf="@id/weekly_progress" />
+
+                    <!-- Circular Progress -->
+                    <ProgressBar
+                        android:id="@+id/progress_circle"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="8dp"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/circular_progress"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_percent"
+                        app:layout_constraintStart_toEndOf="@id/tv_percent"
+                        app:layout_constraintTop_toTopOf="@id/tv_percent" />
+
+                    <!-- Arrow -->
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/arrow_forward"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/progress_circle"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#666666" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- VIDEO INSIGHTS CARD                         -->
+                <!-- ─────────────────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/videoInsightsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Header -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp"
+                            android:paddingTop="14dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Video insights"
+                                android:textColor="#1C1E21"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvInsightDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_tab_unselected"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
+                                android:text="Today"
+                                android:textColor="#1877F2"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <!-- ── DATE FILTER CHIPS ──────────────── -->
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="12dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="4dp"
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:id="@+id/dateFilterRow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/filterToday"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_tab_selected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Today"
+                                    android:textColor="#1877F2"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/filterYesterday"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/bg_tab_unselected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Yesterday"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/filter7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/bg_tab_unselected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Last 7 days"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/filter28"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/bg_tab_unselected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Last 28 days"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/filter90"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/bg_tab_unselected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Last 90 days"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+                        </HorizontalScrollView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <!-- ── LOADING STATE ────────────────── -->
+                        <LinearLayout
+                            android:id="@+id/insightsLoadingState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="32dp"
+                            android:visibility="visible">
+
+                            <ProgressBar
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:indeterminate="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Loading insights..."
+                                android:textColor="#90949C"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- ── CONTENT STATE ────────────────── -->
+                        <LinearLayout
+                            android:id="@+id/insightsContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <!-- Metric selector tabs -->
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingHorizontal="12dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="4dp"
+                                android:scrollbars="none">
+
+                                <LinearLayout
+                                    android:id="@+id/metricTabsRow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tabMinutes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/bg_tab_selected"
+                                        android:paddingHorizontal="14dp"
+                                        android:paddingVertical="6dp"
+                                        android:text="Minutes viewed"
+                                        android:textColor="#1877F2"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tabVideoViews"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:background="@drawable/bg_tab_unselected"
+                                        android:paddingHorizontal="14dp"
+                                        android:paddingVertical="6dp"
+                                        android:text="1-Min views"
+                                        android:textColor="#65676B"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tab3SecViews"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:background="@drawable/bg_tab_unselected"
+                                        android:paddingHorizontal="14dp"
+                                        android:paddingVertical="6dp"
+                                        android:text="3-Sec views"
+                                        android:textColor="#65676B"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tabEngagement"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:background="@drawable/bg_tab_unselected"
+                                        android:paddingHorizontal="14dp"
+                                        android:paddingVertical="6dp"
+                                        android:text="Engagement"
+                                        android:textColor="#65676B"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tabNetFollowers"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:background="@drawable/bg_tab_unselected"
+                                        android:paddingHorizontal="14dp"
+                                        android:paddingVertical="6dp"
+                                        android:text="Net followers"
+                                        android:textColor="#65676B"
+                                        android:textSize="12sp" />
+
+                                </LinearLayout>
+                            </HorizontalScrollView>
+
+                            <!-- Big number + growth badge -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingBottom="4dp">
+
+                                <TextView
+                                    android:id="@+id/tvChartBigNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textColor="#1C1E21"
+                                    android:textSize="28sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tvChartMetricName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="Minutes viewed"
+                                    android:textColor="#65676B"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:id="@+id/tvChartGrowth"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3dp"
+                                    android:text="↑ 0%"
+                                    android:textColor="#1D9E75"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                            <!-- LINE CHART -->
+                            <com.infotech.wishmaplus.VideoInsightsChartView
+                                android:id="@+id/videoInsightsChart"
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="4dp"
+                                android:background="#E4E6EA" />
+
+                            <!-- 5-stat strip -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:paddingHorizontal="2dp"
+                                    android:paddingVertical="12dp">
+
+                                    <TextView
+                                        android:id="@+id/tvMinutesViewed"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:gravity="center"
+                                        android:text="Min\nViewed"
+                                        android:textColor="#90949C"
+                                        android:textSize="9sp" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="0.5dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#E4E6EA" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:paddingHorizontal="2dp"
+                                    android:paddingVertical="12dp">
+
+                                    <TextView
+                                        android:id="@+id/tvVideoViews"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:gravity="center"
+                                        android:text="1-Min\nViews"
+                                        android:textColor="#90949C"
+                                        android:textSize="9sp" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="0.5dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#E4E6EA" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:paddingHorizontal="2dp"
+                                    android:paddingVertical="12dp">
+
+                                    <TextView
+                                        android:id="@+id/tvThreeSecViews"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:gravity="center"
+                                        android:text="3-Sec\nViews"
+                                        android:textColor="#90949C"
+                                        android:textSize="9sp" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="0.5dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#E4E6EA" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:paddingHorizontal="2dp"
+                                    android:paddingVertical="12dp">
+
+                                    <TextView
+                                        android:id="@+id/tvInsightEngagement"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:gravity="center"
+                                        android:text="Engage\nment"
+                                        android:textColor="#90949C"
+                                        android:textSize="9sp" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="0.5dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#E4E6EA" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:paddingHorizontal="2dp"
+                                    android:paddingVertical="12dp">
+
+                                    <TextView
+                                        android:id="@+id/tvNetFollowers"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textColor="#1877F2"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:gravity="center"
+                                        android:text="Net\nFollowers"
+                                        android:textColor="#90949C"
+                                        android:textSize="9sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#E4E6EA" />
+
+                            <!-- Views today footer -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#F7F8FA"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="16dp"
+                                android:paddingVertical="10dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Views today"
+                                    android:textColor="#65676B"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:id="@+id/tvViewsToday"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textColor="#1877F2"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!-- ── ERROR STATE ──────────────────── -->
+                        <LinearLayout
+                            android:id="@+id/insightsErrorState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="20dp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/tvInsightsError"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Could not load insights"
+                                android:textColor="#65676B"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/tvInsightsRetry"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="12dp"
+                                android:text="Retry"
+                                android:textColor="#1877F2"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <!-- ─────────────────────────────────────────────────────────────────── -->
+                <!-- PAGE INSIGHTS CARD                                                   -->
+                <!-- Insert this block AFTER the videoInsightsCard CardView              -->
+                <!-- and BEFORE the analyticsCard CardView in the layout XML             -->
+                <!-- ─────────────────────────────────────────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/pageInsightsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- ── Header ──────────────────────────────────────────────── -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp"
+                            android:paddingTop="14dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Page insights"
+                                android:textColor="#1C1E21"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvPageInsightDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_tab_unselected"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
+                                android:text="Today"
+                                android:textColor="#1877F2"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <!-- ── DATE FILTER CHIPS ────────────────────────────────────── -->
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="12dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="4dp"
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/pageFilterToday"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_tab_selected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Today"
+                                    android:textColor="#1877F2"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/pageFilterYesterday"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/bg_tab_unselected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Yesterday"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/pageFilter7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/bg_tab_unselected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Last 7 days"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/pageFilter28"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/bg_tab_unselected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Last 28 days"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/pageFilter90"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:background="@drawable/bg_tab_unselected"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Last 90 days"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+                        </HorizontalScrollView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <!-- ── LOADING STATE ─────────────────────────────────────────── -->
+                        <LinearLayout
+                            android:id="@+id/pageInsightsLoadingState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="32dp"
+                            android:visibility="visible">
+
+                            <ProgressBar
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:indeterminate="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Loading page insights..."
+                                android:textColor="#90949C"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- ── CONTENT STATE ─────────────────────────────────────────── -->
+                        <LinearLayout
+                            android:id="@+id/pageInsightsContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <!-- Row 1: Impressions / Page Likes / New Page Likes / Viral Reach -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="4dp">
+
+                                <!-- Impressions -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="6dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Impressions"
+                                        android:textColor="#65676B"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvPageImpressions"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvPageImpressionsGrowth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="+0%"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <!-- Page Likes -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Page likes"
+                                        android:textColor="#65676B"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvPageLikes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvPageLikesGrowth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="+0%"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- Row 2: New Page Likes / Viral Reach -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="4dp">
+
+                                <!-- New Page Likes -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="6dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="New page likes"
+                                        android:textColor="#65676B"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvNewPageLikes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvNewPageLikesGrowth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="+0%"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <!-- Viral Reach -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Viral reach"
+                                        android:textColor="#65676B"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvViralReach"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvViralReachGrowth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="+0%"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- Row 3: Impressions (Ads) / AD Clicks -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="4dp">
+
+                                <!-- Ad Impressions -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="6dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Ad impressions"
+                                        android:textColor="#65676B"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvAdImpressions"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvAdImpressionsGrowth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="+0%"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <!-- AD Clicks -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="AD clicks"
+                                        android:textColor="#65676B"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvAdClicks"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvAdClicksGrowth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="+0%"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- Row 4: Actions / Reach -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="12dp">
+
+                                <!-- Actions -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="6dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Actions"
+                                        android:textColor="#65676B"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvPageActions"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvPageActionsGrowth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="+0%"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <!-- Reach -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/tab_selected_bg"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Reach"
+                                        android:textColor="#65676B"
+                                        android:textSize="10sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvPageReach"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0"
+                                        android:textColor="#1C1E21"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvPageReachGrowth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="+0%"
+                                        android:textColor="#1D9E75"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- ── TOP POSTS section ────────────────────────────────── -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#E4E6EA" />
+
+                            <!-- Top Posts header -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="16dp"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="8dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="TOP POSTS"
+                                    android:textColor="#65676B"
+                                    android:textSize="11sp"
+                                    android:letterSpacing="0.08"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <!-- Column headers -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="16dp"
+                                android:paddingBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="3"
+                                    android:text="Post"
+                                    android:textColor="#90949C"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Reach"
+                                    android:textColor="#90949C"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Likes"
+                                    android:textColor="#90949C"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Shares"
+                                    android:textColor="#90949C"
+                                    android:textSize="10sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="#E4E6EA" />
+
+                            <!-- Top Posts list container — rows added programmatically -->
+                            <LinearLayout
+                                android:id="@+id/topPostsContainer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp" />
+
+                        </LinearLayout>
+
+                        <!-- ── ERROR STATE ────────────────────────────────────────────── -->
+                        <LinearLayout
+                            android:id="@+id/pageInsightsErrorState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="20dp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/tvPageInsightsError"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Could not load page insights"
+                                android:textColor="#65676B"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/tvPageInsightsRetry"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="12dp"
+                                android:text="Retry"
+                                android:textColor="#1877F2"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <!-- ── END PAGE INSIGHTS CARD ─────────────────────────────────────────── -->
+                
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- ANALYTICS CARD                              -->
+                <!-- ─────────────────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/analyticsCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:id="@+id/analytics"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/analyticsHead"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp"
+                            android:paddingTop="14dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Analytics"
+                                android:textColor="#1C1E21"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="16dp"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_arrow_forward"
+                                app:tint="#65676B" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <!-- 28 / 7 / Today time tabs -->
+                        <LinearLayout
+                            android:id="@+id/tabContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp"
+                            android:paddingVertical="10dp">
+
+                            <TextView
+                                android:id="@+id/tab28"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_tab_unselected"
+                                android:paddingHorizontal="16dp"
+                                android:paddingVertical="7dp"
+                                android:text="28 days"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/tab7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:background="@drawable/bg_tab_unselected"
+                                android:paddingHorizontal="16dp"
+                                android:paddingVertical="7dp"
+                                android:text="7 days"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/tabToday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:background="@drawable/bg_tab_unselected"
+                                android:paddingHorizontal="16dp"
+                                android:paddingVertical="7dp"
+                                android:text="Today"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <!-- Likes / Comments -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Likes"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvLikeValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:text="0"
+                                    android:textColor="#1C1E21"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="0.5dp"
+                                android:layout_height="match_parent"
+                                android:background="#E4E6EA" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Comments"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvCommentsValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:text="0"
+                                    android:textColor="#1C1E21"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <!-- Shares / Engagement -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Shares"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvSharesValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:text="0"
+                                    android:textColor="#1C1E21"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="0.5dp"
+                                android:layout_height="match_parent"
+                                android:background="#E4E6EA" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Engagement"
+                                    android:textColor="#65676B"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvEngagementValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:text="0"
+                                    android:textColor="#1C1E21"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- CONTENT CARD                                -->
+                <!-- ─────────────────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/contentCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:id="@+id/contentLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/contentHead"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp"
+                            android:paddingTop="14dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="4dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Content"
+                                android:textColor="#1C1E21"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="16dp"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_arrow_forward"
+                                app:tint="#65676B" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingBottom="10dp"
+                            android:text="Latest post"
+                            android:textColor="#65676B"
+                            android:textSize="13sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp"
+                            android:paddingBottom="16dp">
+
+                            <LinearLayout
+                                android:id="@+id/imgProfile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="120dp"
+                                    android:layout_height="140dp"
+                                    app:cardCornerRadius="10dp"
+                                    app:cardElevation="0dp">
+
+                                    <ImageView
+                                        android:id="@+id/imagePost"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/app_logo" />
+
+                                    <VideoView
+                                        android:id="@+id/videoPost"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:clipToOutline="true"
+                                        android:visibility="gone" />
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:id="@+id/postCaption"
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="2"
+                                    android:text=""
+                                    android:textColor="#1C1E21"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="4dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/tab_selected_bg"
+                                        android:orientation="vertical"
+                                        android:padding="10dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Likes"
+                                            android:textColor="#65676B"
+                                            android:textSize="10sp" />
+
+                                        <TextView
+                                            android:id="@+id/likesValue"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="0"
+                                            android:textColor="#1C1E21"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="4dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/tab_selected_bg"
+                                        android:orientation="vertical"
+                                        android:padding="10dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Earnings"
+                                            android:textColor="#65676B"
+                                            android:textSize="10sp" />
+
+                                        <TextView
+                                            android:id="@+id/earningsValue"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="₹0"
+                                            android:textColor="#1C1E21"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="4dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/tab_selected_bg"
+                                        android:orientation="vertical"
+                                        android:padding="10dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Engagement"
+                                            android:textColor="#65676B"
+                                            android:textSize="10sp" />
+
+                                        <TextView
+                                            android:id="@+id/engagementValue"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="0"
+                                            android:textColor="#1C1E21"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="4dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/tab_selected_bg"
+                                        android:orientation="vertical"
+                                        android:padding="10dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Comments"
+                                            android:textColor="#65676B"
+                                            android:textSize="10sp" />
+
+                                        <TextView
+                                            android:id="@+id/commentsValue"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="0"
+                                            android:textColor="#1C1E21"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- ─────────────────────────────────────────── -->
+                <!-- OTHER CARD                                  -->
+                <!-- ─────────────────────────────────────────── -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="16dp"
+                            android:paddingTop="14dp"
+                            android:paddingBottom="10dp"
+                            android:text="Other"
+                            android:textColor="#1C1E21"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#E4E6EA" />
+
+                        <LinearLayout
+                            android:id="@+id/cardsGrid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="12dp">
+
+                            <LinearLayout
+                                android:id="@+id/creator_support_card"
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/card_border"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/support" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="Creator support"
+                                    android:textColor="#1C1E21"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                android:layout_marginStart="6dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/card_border"
+                                android:orientation="vertical"
+                                android:padding="12dp"
+                                android:visibility="gone">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/setting_icon"
+                                    app:tint="@android:color/black" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="Settings"
+                                    android:textColor="#1C1E21"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#7C7B7B"/>
+        </shape>
+    </item>
+
+    <item
+        android:gravity="center"
+        android:width="20dp"
+        android:height="20dp">
+        <animated-rotate
+            android:drawable="@drawable/custom_spinner_ring"
+            android:pivotX="50%"
+            android:pivotY="50%"/>
+    </item>
+
+</layer-list>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    app:strokeWidth="2dp"
+    app:strokeColor="#26FFFFFF"
+    app:cardBackgroundColor="#111111">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 9:16 aspect ratio -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <View
+            android:id="@+id/aspectAnchor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="9:16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Thumbnail -->
+        <ImageView
+            android:id="@+id/reelThumb"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#000000"
+            android:contentDescription="@string/reel_thumbnail"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="@id/aspectAnchor"
+            app:layout_constraintBottom_toBottomOf="@id/aspectAnchor"
+            app:layout_constraintStart_toStartOf="@id/aspectAnchor"
+            app:layout_constraintEnd_toEndOf="@id/aspectAnchor" />
+
+        <!-- Top Gradient -->
+        <View
+            android:id="@+id/scrimTop"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:background="@drawable/gradient_reel_scrim_top"
+            app:layout_constraintTop_toTopOf="@id/aspectAnchor"
+            app:layout_constraintStart_toStartOf="@id/aspectAnchor"
+            app:layout_constraintEnd_toEndOf="@id/aspectAnchor" />
+
+        <!-- Bottom Gradient -->
+        <View
+            android:id="@+id/scrimBottom"
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:background="@drawable/gradient_reel_scrim_bottom"
+            app:layout_constraintBottom_toBottomOf="@id/aspectAnchor"
+            app:layout_constraintStart_toStartOf="@id/aspectAnchor"
+            app:layout_constraintEnd_toEndOf="@id/aspectAnchor" />
+
+        <!-- Reel Badge -->
+        <LinearLayout
+            android:id="@+id/playBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_reel_glass_badge"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="7dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="9dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintStart_toStartOf="@id/aspectAnchor"
+            app:layout_constraintTop_toTopOf="@id/aspectAnchor">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_play_circle_outline"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/tvReelLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:letterSpacing="0.04"
+                android:text="Reel"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Pinned -->
+        <ImageView
+            android:id="@+id/icPinned"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_pin_circle"
+            android:padding="4dp"
+            android:src="@drawable/ic_bookmark"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/aspectAnchor"
+            app:layout_constraintTop_toTopOf="@id/aspectAnchor"
+            app:tint="#FFD54F" />
+
+        <!-- Views -->
+        <LinearLayout
+            android:id="@+id/viewsRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/aspectAnchor"
+            app:layout_constraintStart_toStartOf="@id/aspectAnchor">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_eye"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/tvReelViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:shadowColor="#80000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:text="1.2M" />
+
+        </LinearLayout>
+
+        <!-- Duration -->
+        <TextView
+            android:id="@+id/tvReelDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_reel_glass_badge"
+            android:letterSpacing="0.03"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:shadowColor="#80000000"
+            android:shadowDx="0"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/aspectAnchor"
+            app:layout_constraintEnd_toEndOf="@id/aspectAnchor"
+            tools:text="0:28" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

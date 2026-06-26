@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/bottom_sheet_moderator_detail.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_rounded_bg"
+    android:paddingBottom="24dp">
+
+    <!-- Drag handle -->
+    <View
+        android:id="@+id/dragHandle"
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drag_handle_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ── Profile section ──────────────────────────────────────────── -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bsIvAvatar"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circle_background"
+        android:clipToOutline="true"
+        android:outlineProvider="background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dragHandle" />
+
+    <TextView
+        android:id="@+id/bsTvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="Full Name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bsIvAvatar" />
+
+    <TextView
+        android:id="@+id/bsTvMobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="—"
+        android:textColor="@color/grey_4"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bsTvName" />
+
+    <!-- Invite status pill -->
+    <TextView
+        android:id="@+id/bsTvInviteStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_tab_unselected"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="5dp"
+        android:text="Pending"
+        android:textColor="@color/grey_5"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bsTvMobile" />
+
+    <!-- Entry date -->
+    <TextView
+        android:id="@+id/bsTvEntryDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="Since Jun 11, 2026"
+        android:textColor="@color/grey_4"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bsTvInviteStatus" />
+
+    <!-- Divider -->
+    <View
+        android:id="@+id/bsDivider1"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/grey_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bsTvEntryDate" />
+
+    <!-- ── Permissions section ───────────────────────────────────────── -->
+    <TextView
+        android:id="@+id/bsTvPermLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:text="Permissions"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bsDivider1" />
+
+    <!-- Manage Content row -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rowManageContent"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rectangle"
+        android:paddingHorizontal="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bsTvPermLabel">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icRowContent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryLight" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Manage content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switchManageContent"
+            app:layout_constraintStart_toEndOf="@id/icRowContent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchManageContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/colorPrimaryLight" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Manage Messages row -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rowManageMessages"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rectangle"
+        android:paddingHorizontal="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rowManageContent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icRowMessages"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_messenger"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryLight" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Manage messages"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switchManageMessages"
+            app:layout_constraintStart_toEndOf="@id/icRowMessages"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchManageMessages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/colorPrimaryLight" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Manage Community row -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rowManageCommunity"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rectangle"
+        android:paddingHorizontal="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rowManageMessages">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icRowCommunity"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/contacts"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryLight" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Manage community"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switchManageCommunity"
+            app:layout_constraintStart_toEndOf="@id/icRowCommunity"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchManageCommunity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/colorPrimaryLight" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- View Insights row -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rowViewInsights"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rectangle"
+        android:paddingHorizontal="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rowManageCommunity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icRowInsights"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_insights"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryLight" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="View insights"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switchViewInsights"
+            app:layout_constraintStart_toEndOf="@id/icRowInsights"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchViewInsights"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:thumbTint="@color/white"
+            app:trackTint="@color/colorPrimaryLight" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Divider -->
+    <View
+        android:id="@+id/bsDivider2"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/grey_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rowViewInsights" />
+
+    <!-- ── Action buttons ────────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/btnRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bsDivider2">
+
+        <!-- Remove Access -->
+        <TextView
+            android:id="@+id/btnRemoveAccess"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_outline_red"
+            android:gravity="center"
+            android:text="Remove access"
+            android:textColor="@color/red"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- Save -->
+        <TextView
+            android:id="@+id/btnSavePermissions"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_blue_filled"
+            android:gravity="center"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
